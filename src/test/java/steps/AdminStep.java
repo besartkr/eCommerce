@@ -14,9 +14,7 @@ import pages.AdminPage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Karthik on 10/15/2016.
- */
+
 public class AdminStep extends BaseUtil {
 
     private BaseUtil base;
@@ -61,7 +59,7 @@ public class AdminStep extends BaseUtil {
     @Then("^The admin user will no longer be available$")
     public void theAdminUserWillNoLongerBeAvailable() throws Throwable {
      AdminPage page = new AdminPage ( base.webDriver );
-     page.successfullySaved ();
+     /* page.successfullySaved (); */
     }
 
     public class User {
