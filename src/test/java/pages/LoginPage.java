@@ -8,9 +8,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 
-/**
- * Created by Karthik on 10/25/2016.
- */
 public class LoginPage extends BaseUtil {
 
 
@@ -20,23 +17,19 @@ public class LoginPage extends BaseUtil {
     }
 
 
-
-
-    @FindBy(how = How.NAME, using = "txtUsername")
+    @FindBy(name = "txtUsername")
     public WebElement txtUserName;
 
-
-
-    @FindBy(how = How.NAME, using = "txtPassword")
+    @FindBy(name = "txtPassword")
     public WebElement txtPassword;
 
-    @FindBy(how = How.ID, using = "btnLogin")
+    @FindBy(id = "btnLogin")
     public WebElement btnLogin;
 
-    @FindBy(how = How.ID, using = "welcome")
+    @FindBy(id= "welcome")
     public WebElement welcomeMessage;
 
-    @FindBy (how = How.CSS, using = "[href='/index.php/auth/logout']")
+    @FindBy (css = "[href='/index.php/auth/logout']")
     public WebElement logout;
 
 

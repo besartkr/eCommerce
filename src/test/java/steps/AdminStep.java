@@ -56,10 +56,12 @@ public class AdminStep extends BaseUtil {
         page.ChangeEmployeDetails();
     }
 
-    @Then("^The admin user will no longer be available$")
-    public void theAdminUserWillNoLongerBeAvailable() throws Throwable {
+    @Then("^The user Role will change from Admin to ESS$")
+    public void theUseRoleWillChangeFromAdminToEss() throws Throwable {
      AdminPage page = new AdminPage ( base.webDriver );
-     /* page.successfullySaved (); */
+
+     page.saveButton ();
+      page.successfullySaved ();
     }
 
     public class User {

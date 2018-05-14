@@ -8,9 +8,6 @@ import cucumber.api.java.en.Given;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-/**
- * Created by Karthik on 10/17/2016.
- */
 public class Hook extends BaseUtil{
 
 
@@ -34,8 +31,8 @@ public class Hook extends BaseUtil{
         base.webDriver = new ChromeDriver();
     }
 
-    @Given("^I navigate to the home page and logged in$")
-    public void iNavigateToTheHomePageAndLoggedIn() throws Throwable {
+    @Given("^I navigate to the home page$")
+    public void iNavigateToTheHomePage() throws Throwable {
 
         System.out.println ( "Navigate Login Page" );
         base.webDriver.navigate ().to ( "http://opensource.demo.orangehrmlive.com/index.php/auth/login" );

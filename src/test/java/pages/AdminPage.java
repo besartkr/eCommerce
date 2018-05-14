@@ -7,9 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * Created by Karthik on 10/25/2016.
- */
+
 public class AdminPage extends BaseUtil {
 
     public AdminPage(WebDriver webDriver) {
@@ -87,9 +85,9 @@ public class AdminPage extends BaseUtil {
 
 
     /*Confirm details entered are accepted */
-    public void successfullySaved() {
+    public void successfullySaved() throws InterruptedException {
 
-
+        Thread.sleep ( 1000 );
         successMessage.getText ().contains ( "Successfully Saved" );
     }
 
@@ -139,13 +137,16 @@ public class AdminPage extends BaseUtil {
     }
 public void ChangeEmployeDetails () {
 
-        Select userrole = new Select ( userRorle );
-        userrole.selectByValue ( "2" );
+    Select userrole = new Select ( userRorle );
+    userrole.selectByValue ( "2" );
 
 
     {
 
     }
-
 }
+    public void saveButton () {
+        editDetails.click ();
+    }
+
 }

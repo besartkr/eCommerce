@@ -2,6 +2,7 @@ package steps;
 
 import Base.BaseUtil;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -12,9 +13,7 @@ import pages.LoginPage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Karthik on 10/15/2016.
- */
+
 public class LoginStep extends BaseUtil {
 
     private BaseUtil webDriver;
@@ -57,6 +56,12 @@ public class LoginStep extends BaseUtil {
     public void iEnterUsernameAndPassword(String userName, String password) throws Throwable {
         System.out.println("UserName is : " + userName);
         System.out.println("Password is : " + password);
+    }
+
+    @And("^I click on the log out button to logout$")
+    public void iClickOnTheLogOutButtonToLogout() throws Throwable {
+      LoginPage page = new LoginPage ( webDriver.webDriver);
+      page.logout ();
     }
 
 
