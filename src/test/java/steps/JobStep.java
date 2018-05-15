@@ -30,4 +30,9 @@ public class JobStep extends BaseUtil {
         JobsPage page = new JobsPage ( base.webDriver );
         page.adminTab ();
     }
+
+    @When("^I enter the details of the new Job title$")
+    public void iEnterTheDetailsOfTheNewJobTitle() throws Throwable {
+
+    }
 }

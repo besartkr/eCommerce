@@ -42,15 +42,19 @@ Selectors for the Jobs Admin tab
     @FindBy (id = "menu_admin_workShift")
     public  WebElement workShiftSelector;
 
+
+    /*     Selectors for the Job Titles table   */
+
     public void adminTab () {
 
         Actions action = new Actions (webDriver);
-        WebElement we = webDriver.findElement(By.cssSelector ("[id='menu_admin_viewAdminModule']"));
-        WebElement we1 = webDriver.findElement(By.id ("menu_admin_Job"));
-        action.moveToElement (we).build ().perform ();
-        action.moveToElement (we1).build ().perform ();
 
-        JobTItleListSelector.click ();
+     action.moveToElement (adminTab).build ().perform ();
+     action.moveToElement (JobMenuSelector).build ().perform();
+     action.moveToElement(JobTItleListSelector).build().perform();
+        adminTab.click ();
+        JobMenuSelector.click ();
+        JobTItleListSelector.click();
 
 
     }
