@@ -10,7 +10,7 @@ Feature: Admin Jobs
     And I click login button
     Then I should see the welcome message
 
-  @inProgress
+  @test
   Scenario:
     Given I navigate to the list of JobTitles
     When I enter the details of the new Job title
