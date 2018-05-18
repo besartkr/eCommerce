@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class JobsPage extends BaseUtil {
 
@@ -55,6 +58,24 @@ Selectors for the Jobs Admin tab
         adminTab.click ();
         JobMenuSelector.click ();
         JobTItleListSelector.click();
+
+
+    }
+
+    public void jobTitles() {
+/* Search on the table  */
+
+        WebElement test = webDriver.findElement(By.cssSelector("[name='frmList_ohrmListComponent']"));
+
+        for(int i = 0; i <test .findElements(By.cssSelector("[class='left']")).size();i++)
+
+            if (test.findElements(By.cssSelector("[class='left']")).get(i).getText().contains("test"))
+            {
+
+               test.findElements(By.cssSelector("[class='left']")).get(i).click();
+               break;
+            }
+
 
 
     }
