@@ -7,9 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class JobsPage extends BaseUtil {
 
@@ -48,10 +49,27 @@ Selectors for the Jobs Admin tab
 
     /*     Selectors for the Job Titles table   */
 
+        @FindBy(css = "[class='odd']")
+        public WebElement olddField;
+
+        @FindBy(css = "[class='even']")
+        public List <WebElement> evenField;
+
+        /*        Add Link         */
+        @FindBy (name = "btnAdd")
+        public WebElement addButton;
+
+        @FindBy(name = "jobTitle[jobTitle]")
+        public WebElement enterJobTitle;
+
+        @FindBy(name = "jobTitle[jobDescription]")
+        public WebElement enterJobDesc;
+
+        @FindBy(name = "jobTitle[note]")
+        public WebElement enterNotes;
+
     public void adminTab () {
-
-        Actions action = new Actions (webDriver);
-
+     Actions action = new Actions (webDriver);
      action.moveToElement (adminTab).build ().perform ();
      action.moveToElement (JobMenuSelector).build ().perform();
      action.moveToElement(JobTItleListSelector).build().perform();
@@ -61,22 +79,27 @@ Selectors for the Jobs Admin tab
 
 
     }
+public void jobTitles() {
 
-    public void jobTitles() {
-/* Search on the table  */
+    /* Grab the table */
 
-        WebElement test = webDriver.findElement(By.cssSelector("[name='frmList_ohrmListComponent']"));
+      WebElement table = webDriver.findElement ( By.id ( "resultTable" ) );
 
-        for(int i = 0; i <test .findElements(By.cssSelector("[class='left']")).size();i++)
+      /* Now get all the TR elements from the table */
+      List <WebElement> allRows = table.findElements ( By.tagName ( "tr" ) );
 
-            if (test.findElements(By.cssSelector("[class='left']")).get(i).getText().contains("test"))
-            {
+      /* And iterate over them, getting the cells */
+      for (WebElement row : allRows) {
+          List <WebElement> cells = row.findElements ( By.partialLinkText ( "CEO" ) );
 
-               test.findElements(By.cssSelector("[class='left']")).get(i).click();
-               break;
+          /* Print the contents of each cell */
+          for (WebElement cell : cells) {
+              System.out.println ( cell.getText () );
+              cell.click ();
+          }
+
+      }
+  }
             }
 
 
-
-    }
-}
