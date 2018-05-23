@@ -12,6 +12,17 @@ Feature: Admin Jobs
 
   @test
   Scenario:
-    Given I navigate to the list of JobTitles
-    When I enter the details of the new Job title
-    Then The new job title will be displayed in the list
+    Given I navigate to the list of available jobs
+    When I search for existing job title
+  # Then  the Job Title will be displayed in the table
+
+  Scenario:
+    Given I navigate to the list of available jobs
+    When I search for existing job title
+   # And   if the Job is not in the database table
+    #Then I will add a new one
+
+  Scenario:
+  #  Given I amend the job title of an employer
+   # When I save the new job in the database
+    #Then the Job title of the employer will be updated
