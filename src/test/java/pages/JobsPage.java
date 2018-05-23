@@ -10,10 +10,11 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class JobsPage extends BaseUtil {
 
@@ -55,6 +56,8 @@ Selectors for the Jobs Admin tab
     @FindBy(css = "[id='resultTable']")
     public WebElement resultsTable;
 
+    @FindBy(id = "btnAdd")
+    public WebElement addNewJob;
 
     public void adminTab() {
 
@@ -70,12 +73,27 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public void jobTitles() {
-        /* Search on the table
+    public void jobTitles() throws InterruptedException {
+        /* Search on the table  */
 
+        WebElement baseTable = resultsTable;
+        List<WebElement> linksOnTheTable = baseTable.findElements(By.tagName("a"));
+        for (WebElement selectLink : linksOnTheTable) {
+            Thread.sleep(2000);
+
+            if (selectLink.getText().equals("CEO")) {
+                selectLink.click();
+                break;
+            }
+
+        }
+    }
+}
+/*
         WebElement baseTable = resultsTable;
         List<WebElement> links = baseTable.findElements(By.tagName("a"));
         links.size();
+
 
         for (int i = 1; i <= links.size(); i = i + 1)
 
@@ -85,31 +103,4 @@ Selectors for the Jobs Admin tab
         }
     }
  }
- */
-        try {
-            for (int i = 0; i < 5; i++) {
-                try {
-                    if (!webDriver.findElements(By.xpath("/html/body/div[@class='container']/table[@class='table table-striped'][2]/tbody[@id='bought']/tr[@id=" + i + "]/th[4]/button")).isEmpty()) {
-                        try {
-                            webDriver.findElement(By.xpath("/html/body/div[@class='container']/table[@class='table table-striped'][2]/tbody[@id='bought']/tr[@id=" + i + "]/th[4]/button")).click();
-                        } catch (java.util.NoSuchElementException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        try {
-                            System.out.println("no products to sell ");
-                        } catch (NoSuchElementException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (NoSuchElementException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-}
+*/
