@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -73,34 +74,26 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public void jobTitles() throws InterruptedException {
+     public void jobTitles() throws InterruptedException {
         /* Search on the table  */
 
-        WebElement baseTable = resultsTable;
-        List<WebElement> linksOnTheTable = baseTable.findElements(By.tagName("a"));
-        for (WebElement selectLink : linksOnTheTable) {
-            Thread.sleep(2000);
 
-            if (selectLink.getText().equals("CEO")) {
-                selectLink.click();
-                break;
-            }
+        //To locate table.
+        WebElement baseTable = resultsTable;
+        List<WebElement> row = baseTable.findElements(By.tagName("tr"));
+        System.out.println("Total Number of Rows = " + row.size());
+
+        //Column Count in WebTable
+        List<WebElement> column = row.get(10).findElements(By.tagName("a"));
+
+        System.out.println("Total Number of Column = " + column.size());
+
+        System.out.println("==================================================================");
+        //Print content of Rows
+        for (int i=0;i<=row.size()-1 ;i++){
+            System.out.println(row.get(i).getText());
+        }
 
         }
-    }
-}
-/*
-        WebElement baseTable = resultsTable;
-        List<WebElement> links = baseTable.findElements(By.tagName("a"));
-        links.size();
-
-
-        for (int i = 1; i <= links.size(); i = i + 1)
-
-        {
-            System.out.println(links.get(i).getText());
-
         }
-    }
- }
-*/
+
