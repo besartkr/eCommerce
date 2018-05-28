@@ -24,15 +24,16 @@ public class JobStep extends BaseUtil {
     }
 
 
-
-    @Given("^I navigate to the list of JobTitles$")
-    public void iNavigateToTheListOfJobTitles() throws Throwable {
+    @Given("^I navigate to the list of available jobs$")
+    public void iNavigateToTheListOfAvailableJobs() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
         JobsPage page = new JobsPage ( base.webDriver );
         page.adminTab ();
     }
 
-    @When("^I enter the details of the new Job title$")
-    public void iEnterTheDetailsOfTheNewJobTitle() throws Throwable {
-
+    @When("^I search for existing job title$")
+    public void iSearchForExistingJobTitle() throws Throwable {
+        JobsPage page = new JobsPage ( base.webDriver );
+        page.jobTitles ();
     }
 }
