@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Hook extends BaseUtil{
+public class Hook extends BaseUtil {
 
 
     private BaseUtil base;
@@ -26,11 +26,11 @@ public class Hook extends BaseUtil{
     public void InitializeTest() throws IOException {
 
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream("c:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream fis = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(fis);
 
         if (prop.getProperty("browser").equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
             base.webDriver = new ChromeDriver();
 
         } else if
@@ -38,19 +38,19 @@ public class Hook extends BaseUtil{
             System.setProperty("webdriver.firefox.marionette", "C:\\Users\\besart\\Downloads\\automation\\geckodriver-v0.20.1-win64\\geckodriver.exe");
             base.webDriver = new FirefoxDriver();
 
-        } else
-        {
+        } else {
             if (prop.getProperty("browser").equals("internetExplorer")) {
-                System.setProperty("webdriver.ie.driver","C:\\Users\\besart\\Downloads\\automation\\IEDriverServer_x64_3.12.0\\IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", "C:\\Users\\besart\\Downloads\\automation\\IEDriverServer_x64_3.12.0\\IEDriverServer.exe");
                 base.webDriver = new InternetExplorerDriver();
-             }
+            }
         }
 
     }
+
     @Given("^I navigate to the home page$")
     public void iNavigateToTheHomePage() throws Throwable {
 
-        base.webDriver.navigate ().to ( "http://opensource.demo.orangehrmlive.com/index.php/auth/login" );
+        base.webDriver.navigate().to("http://opensource.demo.orangehrmlive.com/index.php/auth/login");
 
     }
 

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends BaseUtil {
 
 
-    public LoginPage (WebDriver webDriver) {
+    public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
@@ -26,29 +26,29 @@ public class LoginPage extends BaseUtil {
     @FindBy(id = "btnLogin")
     public WebElement btnLogin;
 
-    @FindBy(id= "welcome")
+    @FindBy(id = "welcome")
     public WebElement welcomeMessage;
 
-    @FindBy (css = "[href='/index.php/auth/logout']")
+    @FindBy(css = "[href='/index.php/auth/logout']")
     public WebElement logout;
 
 
     public void Login(String userName, String password) {
-        txtUserName.sendKeys ( userName );
-        txtPassword.sendKeys ( password );
+        txtUserName.sendKeys(userName);
+        txtPassword.sendKeys(password);
     }
 
     public void ClickLogin() {
-        btnLogin.click ();
+        btnLogin.click();
     }
 
 
     public void logout() throws InterruptedException {
 
-       welcomeMessage.click ();
-        Thread.sleep ( 200 );
-        logout.click ();
+        welcomeMessage.click();
+        Thread.sleep(200);
+        logout.click();
 
-        
+
     }
 }

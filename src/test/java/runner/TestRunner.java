@@ -7,12 +7,11 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"" +"src/test/java/features"} ,
+@CucumberOptions(features = {"" + "src/test/java/features"},
         glue = {"steps"},
         tags = "@inProgress")
 
 
-
-public class TestRunner extends  AbstractTestNGCucumberTests{
+public class TestRunner extends AbstractTestNGCucumberTests {
 
 }

@@ -60,6 +60,19 @@ Selectors for the Jobs Admin tab
     @FindBy(id = "btnAdd")
     public WebElement addNewJob;
 
+    /*     add Job title */
+    @FindBy(name = "jobTitle[jobTitle]")
+    public WebElement newJobTitle;
+
+    @FindBy(name = "jobTitle[jobDescription]")
+    public WebElement newJobDescription;
+
+    @FindBy(name = "jobTitle[jobSpec]")
+    public WebElement newJobUploadSpecs;
+
+    @FindBy(id = "jobTitle_note")
+    public WebElement newJobNotes;
+
     public void adminTab() {
 
         Actions action = new Actions(webDriver);
@@ -74,26 +87,39 @@ Selectors for the Jobs Admin tab
 
     }
 
-     public void jobTitles() throws InterruptedException {
-        /* Search on the table  */
-
-
-        //To locate table.
+    public void jobTitles() throws InterruptedException {
+        // To locate table
         WebElement baseTable = resultsTable;
-        List<WebElement> row = baseTable.findElements(By.tagName("tr"));
-        System.out.println("Total Number of Rows = " + row.size());
 
-        //Column Count in WebTable
-        List<WebElement> column = row.get(10).findElements(By.tagName("a"));
+        //    take all of the element under Column "State" inside list
 
-        System.out.println("Total Number of Column = " + column.size());
+        List<WebElement> columVal = baseTable.findElements(By.tagName("tr"));
 
-        System.out.println("==================================================================");
-        //Print content of Rows
-        for (int i=0;i<=row.size()-1 ;i++){
-            System.out.println(row.get(i).getText());
+        System.out.println("Total Number of Rows = " + columVal.size());
+
+        // now for matching one of the content and then performing some action please start a for loop
+
+        // String CEO = "CEO exists in the database";
+        for (int i = 0; i < columVal.size(); i++) {
+            System.out.println("Existing jobs in the list : " + columVal.get(i).getText());
+            // match the content here in the if loop
+
+            if (columVal.get(i).getTagName().equals("CEO")) {
+
+                // perform action
+                columVal.get(i).click();
+
+            }
         }
+    }
 
-        }
-        }
+    public void addNewJob() {
+        addNewJob.click();
+
+    }
+
+    public void enterNewJobDetails (){
+
+    }
+}
 

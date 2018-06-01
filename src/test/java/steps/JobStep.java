@@ -27,13 +27,21 @@ public class JobStep extends BaseUtil {
     @Given("^I navigate to the list of available jobs$")
     public void iNavigateToTheListOfAvailableJobs() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        JobsPage page = new JobsPage ( base.webDriver );
-        page.adminTab ();
+        JobsPage page = new JobsPage(base.webDriver);
+        page.adminTab();
     }
 
     @When("^I search for existing job title$")
     public void iSearchForExistingJobTitle() throws Throwable {
-        JobsPage page = new JobsPage ( base.webDriver );
-        page.jobTitles ();
+        JobsPage page = new JobsPage(base.webDriver);
+        page.jobTitles();
+    }
+
+    @And("^if the Job is not in the database table$")
+    public void ifTheJobIsNotInTheDatabaseTable() throws Throwable {
+        JobsPage page = new JobsPage(base.webDriver);
+        page.addNewJob();
+        page.enterNewJobDetails();
+
     }
 }

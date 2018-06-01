@@ -10,16 +10,17 @@ Feature: Admin Jobs
     And I click login button
     Then I should see the welcome message
 
-  @test
+
   Scenario:
     Given I navigate to the list of available jobs
     When I search for existing job title
   # Then  the Job Title will be displayed in the table
 
+  @inProgress
   Scenario:
     Given I navigate to the list of available jobs
-    When I search for existing job title
-   # And   if the Job is not in the database table
+   # When I search for existing job title
+    And   if the Job is not in the database table
     #Then I will add a new one
 
   Scenario:

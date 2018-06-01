@@ -26,31 +26,31 @@ public class AdminStep extends BaseUtil {
 
     @Given("^I navigate to the Admin tab$")
     public void iNavigateToTheAdminTab() throws Throwable {
-        pages.AdminPage page = new pages.AdminPage ( base.webDriver );
-        page.adminTab ();
+        pages.AdminPage page = new pages.AdminPage(base.webDriver);
+        page.adminTab();
 
 
     }
 
     @When("^I key the admin details$")
     public void iKeyTheAdminDetails(DataTable table) throws Throwable {
-        AdminPage page = new AdminPage ( base.webDriver );
-        page.setAddNewAdmin ();
-        page.userrole ();
+        AdminPage page = new AdminPage(base.webDriver);
+        page.setAddNewAdmin();
+        page.userrole();
         //Create an ArrayList
-        List <User> users = new ArrayList <User> ();
+        List<User> users = new ArrayList<User>();
         //Store all the users
-        users = table.asList ( User.class );
+        users = table.asList(User.class);
 
 
         for (User user : users) {
-            page.Management ( user.employeeName, user.username, user.password, user.confirmpass );
+            page.Management(user.employeeName, user.username, user.password, user.confirmpass);
         }
     }
 
     @And("^I edit my employer details on my username$")
     public void iEditMyEmployerDetailsOnMyUsername() throws InterruptedException {
-        AdminPage page = new AdminPage ( base.webDriver );
+        AdminPage page = new AdminPage(base.webDriver);
         page.selecttoSearch();
         page.enabletToEditDetails();
         page.ChangeEmployeDetails();
@@ -58,10 +58,10 @@ public class AdminStep extends BaseUtil {
 
     @Then("^The user Role will change from Admin to ESS$")
     public void theUseRoleWillChangeFromAdminToEss() throws Throwable {
-     AdminPage page = new AdminPage ( base.webDriver );
+        AdminPage page = new AdminPage(base.webDriver);
 
-     page.saveButton ();
-      page.successfullySaved ();
+        page.saveButton();
+        page.successfullySaved();
     }
 
     public class User {
@@ -73,18 +73,18 @@ public class AdminStep extends BaseUtil {
 
     @When("^I search for an admin account$")
     public void iSearchForAnAdminAccount(DataTable table) throws Throwable {
-        AdminPage page = new AdminPage ( base.webDriver );
-        Thread.sleep ( 200 );
-        page.searchExistingUser ();
+        AdminPage page = new AdminPage(base.webDriver);
+        Thread.sleep(200);
+        page.searchExistingUser();
 
         //Create an ArrayList
-        List <deleteUser> users = new ArrayList <deleteUser> ();
+        List<deleteUser> users = new ArrayList<deleteUser>();
         //Store all the users
-        users = table.asList ( deleteUser.class );
+        users = table.asList(deleteUser.class);
 
 
         for (deleteUser user : users) {
-            page.deleteAdminusers ( user.addUserName, user.employeeName );
+            page.deleteAdminusers(user.addUserName, user.employeeName);
         }
 
     }
@@ -94,33 +94,33 @@ public class AdminStep extends BaseUtil {
         public String employeeName;
 
 
-
     }
+
     @And("^I key the ([^\"]*) and ([^\"]*)$$")
     public void iKeyThe(String EmployeeName, String username, String password, String confirmpass) throws Throwable {
 
 
-        System.out.println ( "EmployeeName : " + EmployeeName );
-        System.out.println ( "Username : " + username );
-        System.out.println ( "Password : " + password );
-        System.out.println ( "Confirm Password " + confirmpass );
+        System.out.println("EmployeeName : " + EmployeeName);
+        System.out.println("Username : " + username);
+        System.out.println("Password : " + password);
+        System.out.println("Confirm Password " + confirmpass);
 
 
     }
 
     @And("^I click Save button$")
     public void iClickSaveButton() throws Throwable {
-        AdminPage page = new AdminPage ( base.webDriver );
-        Thread.sleep ( 2000 );
-        page.saveDetails ();
+        AdminPage page = new AdminPage(base.webDriver);
+        Thread.sleep(2000);
+        page.saveDetails();
     }
 
     @Then("^I will see the details are saved in the table$")
     public void iWillSeeTheDetailsAreSavedInTheTable() throws Throwable {
-        AdminPage page = new AdminPage ( base.webDriver );
-        Thread.sleep ( 200 );
+        AdminPage page = new AdminPage(base.webDriver);
+        Thread.sleep(200);
 
-        page.successfullySaved ();
+        page.successfullySaved();
     }
 
 }

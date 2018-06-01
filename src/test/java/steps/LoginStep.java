@@ -22,33 +22,32 @@ public class LoginStep extends BaseUtil {
         this.webDriver = webDriver;
     }
 
-     @Then("^I should see the welcome message$")
+    @Then("^I should see the welcome message$")
     public void iShouldSeeTheWelcomeMessage() throws Throwable {
 
-        Assert.assertEquals("Its not displayed", webDriver.webDriver.findElement (By.cssSelector ("[class='panelTrigger']") ).isDisplayed(), true);
+        Assert.assertEquals("Its not displayed", webDriver.webDriver.findElement(By.cssSelector("[class='panelTrigger']")).isDisplayed(), true);
     }
-
 
 
     @And("^I click login button$")
     public void iClickLoginButton() throws Throwable {
-        LoginPage page = new LoginPage (webDriver.webDriver);
+        LoginPage page = new LoginPage(webDriver.webDriver);
         page.ClickLogin();
     }
 
 
-    @When ("^I enter the following for Login$")
+    @When("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
         //Create an ArrayList
-        List<User> users =  new ArrayList<User>();
+        List<User> users = new ArrayList<User>();
         //Store all the users
         users = table.asList(User.class);
 
-        LoginPage page = new LoginPage (webDriver.webDriver);
+        LoginPage page = new LoginPage(webDriver.webDriver);
 
 
-        for (User user: users){
-           page.Login(user.username, user.password);
+        for (User user : users) {
+            page.Login(user.username, user.password);
         }
     }
 
@@ -60,8 +59,8 @@ public class LoginStep extends BaseUtil {
 
     @And("^I click on the log out button to logout$")
     public void iClickOnTheLogOutButtonToLogout() throws Throwable {
-      LoginPage page = new LoginPage ( webDriver.webDriver);
-      page.logout ();
+        LoginPage page = new LoginPage(webDriver.webDriver);
+        page.logout();
     }
 
 

@@ -18,7 +18,7 @@ Feature: LoginFeature
     And I click Save button
     Then I will see the details are saved in the table
 
-    @test
+  @test
   Scenario: Login and delete an admin user that left the company
     Given I navigate to the Admin tab
     When I search for an admin account
