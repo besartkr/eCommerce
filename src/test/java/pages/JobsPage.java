@@ -3,6 +3,7 @@ package pages;
 import Base.BaseUtil;
 import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,7 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 public class JobsPage extends BaseUtil {
 
@@ -118,8 +122,26 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public void enterNewJobDetails (){
+    public void enterNewJobDetails () throws IOException, InterruptedException {
+
+
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
+
+        newJobTitle.sendKeys(prop.getProperty("JobTitle"));
+        newJobDescription.sendKeys(prop.getProperty("JobDescription"));
+
+        WebElement file_input = webDriver.findElement(By.name("jobTitle[jobSpec]"));
+        Thread.sleep(2000);
+        file_input.click();
+        file_input.sendKeys("CVBesart.pdf");
+        file_input.sendKeys(Keys.ENTER);
+
+
+
+        }
 
     }
-}
+
 
