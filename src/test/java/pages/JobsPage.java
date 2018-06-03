@@ -1,6 +1,7 @@
 package pages;
 
 import Base.BaseUtil;
+import org.junit.Assert;
 import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +20,7 @@ import org.testng.annotations.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
 public class JobsPage extends BaseUtil {
@@ -77,6 +79,12 @@ Selectors for the Jobs Admin tab
     @FindBy(id = "jobTitle_note")
     public WebElement newJobNotes;
 
+    @FindBy(css = "[class='largeTextBox'] [class='valid']")
+    public WebElement isuploadValidated;
+
+    @FindBy(id = "btnSave")
+    public WebElement saveNewJob;
+
     public void adminTab() {
 
         Actions action = new Actions(webDriver);
@@ -92,6 +100,23 @@ Selectors for the Jobs Admin tab
     }
 
     public void jobTitles() throws InterruptedException {
+        List<WebElement> dates = webDriver.findElements(By.tagName("a"));
+        int count = webDriver.findElements(By.tagName("a")).size();
+        for (int i = 0; i < count; i++) {
+            String text = webDriver.findElements(By.tagName("a")).get(i).getText();
+            Thread.sleep(2000);
+            if (text.equalsIgnoreCase("test")) {
+                webDriver.findElements(By.tagName("a")).get(i).click();
+                break;
+
+            }else {
+                addNewJob.click();
+            }
+        }
+    }
+            /*
+
+
         // To locate table
         WebElement baseTable = resultsTable;
 
@@ -116,32 +141,40 @@ Selectors for the Jobs Admin tab
             }
         }
     }
-
+*/
     public void addNewJob() {
         addNewJob.click();
 
     }
 
-    public void enterNewJobDetails () throws IOException, InterruptedException {
+    public void enterNewJobDetails() throws IOException, InterruptedException {
 
 
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
+        ;
 
-        newJobTitle.sendKeys(prop.getProperty("JobTitle"));
-        newJobDescription.sendKeys(prop.getProperty("JobDescription"));
+        if (newJobTitle.getText().isEmpty()) {
+            newJobTitle.sendKeys(prop.getProperty("JobTitle"));
 
-        WebElement file_input = webDriver.findElement(By.name("jobTitle[jobSpec]"));
-        Thread.sleep(2000);
-        file_input.click();
-        file_input.sendKeys("CVBesart.pdf");
-        file_input.sendKeys(Keys.ENTER);
+        }
+        if (newJobDescription.getText().isEmpty()) {
+            newJobDescription.sendKeys(prop.getProperty("JobDescription"));
+        }
 
+        Thread.sleep(1000);
+
+        if (newJobUploadSpecs.getText().isEmpty()) {
+            newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
+        }
+
+        if (newJobNotes.getText().isEmpty()) {
+            newJobNotes.sendKeys(prop.getProperty("JobNotes"));
 
 
         }
-
+        saveNewJob.click();
     }
 
-
+}
