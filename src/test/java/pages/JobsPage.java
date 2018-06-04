@@ -100,48 +100,24 @@ Selectors for the Jobs Admin tab
     }
 
     public void jobTitles() throws InterruptedException {
-        List<WebElement> dates = webDriver.findElements(By.tagName("a"));
-        int count = webDriver.findElements(By.tagName("a")).size();
-        for (int i = 0; i < count; i++) {
-            String text = webDriver.findElements(By.tagName("a")).get(i).getText();
+        boolean found = false;
+
+        WebElement table = webDriver.findElement(By.id("resultTable"));
+        List<WebElement> jobs = table.findElements(By.tagName("a"));
+
+        for (WebElement job : jobs) {
+            String text = job.getText();
             Thread.sleep(2000);
-            if (text.equalsIgnoreCase("test")) {
-                webDriver.findElements(By.tagName("a")).get(i).click();
-                break;
-
-            }else {
-                addNewJob.click();
+            if (text.equalsIgnoreCase("Test Analyst1")) {
+                job.click();
+                found = true;
             }
         }
-    }
-            /*
-
-
-        // To locate table
-        WebElement baseTable = resultsTable;
-
-        //    take all of the element under Column "State" inside list
-
-        List<WebElement> columVal = baseTable.findElements(By.tagName("tr"));
-
-        System.out.println("Total Number of Rows = " + columVal.size());
-
-        // now for matching one of the content and then performing some action please start a for loop
-
-        // String CEO = "CEO exists in the database";
-        for (int i = 0; i < columVal.size(); i++) {
-            System.out.println("Existing jobs in the list : " + columVal.get(i).getText());
-            // match the content here in the if loop
-
-            if (columVal.get(i).getTagName().equals("CEO")) {
-
-                // perform action
-                columVal.get(i).click();
-
-            }
+        if (!found) {
+            addNewJob.click();
         }
     }
-*/
+
     public void addNewJob() {
         addNewJob.click();
 
@@ -171,8 +147,6 @@ Selectors for the Jobs Admin tab
 
         if (newJobNotes.getText().isEmpty()) {
             newJobNotes.sendKeys(prop.getProperty("JobNotes"));
-
-
         }
         saveNewJob.click();
     }

@@ -19,7 +19,7 @@ Feature: Admin Jobs
   @inProgress
   Scenario:
     Given I navigate to the list of available jobs
-   # When I search for existing job title
+    When I search for existing job title
     And   if the Job is not in the database table
     #Then I will add a new one
 

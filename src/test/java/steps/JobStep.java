@@ -40,7 +40,7 @@ public class JobStep extends BaseUtil {
     @And("^if the Job is not in the database table$")
     public void ifTheJobIsNotInTheDatabaseTable() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
-        page.addNewJob();
+      //  page.addNewJob();
         page.enterNewJobDetails();
 
     }
