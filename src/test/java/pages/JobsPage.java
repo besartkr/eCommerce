@@ -76,7 +76,7 @@ Selectors for the Jobs Admin tab
     @FindBy(name = "jobTitle[jobSpec]")
     public WebElement newJobUploadSpecs;
 
-    @FindBy(id = "jobTitle_note")
+    @FindBy(name = "jobTitle[note]")
     public WebElement newJobNotes;
 
     @FindBy(css = "[class='largeTextBox'] [class='valid']")
@@ -84,6 +84,9 @@ Selectors for the Jobs Admin tab
 
     @FindBy(id = "btnSave")
     public WebElement saveNewJob;
+
+    @FindBy (css = "#frmSavejobTitle > fieldset > ol > li:nth-child(1) > span")
+    public  WebElement newjobValidation;
 
     public void adminTab() {
 
@@ -100,19 +103,24 @@ Selectors for the Jobs Admin tab
     }
 
     public void jobTitles() throws InterruptedException {
-        List<WebElement> dates = webDriver.findElements(By.tagName("a"));
-        int count = webDriver.findElements(By.tagName("a")).size();
-        for (int i = 0; i < count; i++) {
-            String text = webDriver.findElements(By.tagName("a")).get(i).getText();
+        boolean found = false;
+        WebElement table = webDriver.findElement(By.id("resultTable"));
+        List<WebElement> jobs = table.findElements(By.tagName("a"));
+        //webDriver.findElement(By.id("search-results"));
+        //List<WebElement> jobs = webDriver.findElements(By.tagName("a"));
+        for (WebElement job : jobs) {
+            String text = job.getText();
             Thread.sleep(2000);
-            if (text.equalsIgnoreCase("test")) {
-                webDriver.findElements(By.tagName("a")).get(i).click();
-                break;
-
-            }else {
-                addNewJob.click();
+            if (text.equalsIgnoreCase("CEO")) {
+                job.click();
+                found = true;
             }
         }
+        if (!found){
+                addNewJob.click();
+            }
+
+
     }
             /*
 
@@ -151,30 +159,37 @@ Selectors for the Jobs Admin tab
 
 
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        // FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
         ;
 
-        if (newJobTitle.getText().isEmpty()) {
-            newJobTitle.sendKeys(prop.getProperty("JobTitle"));
 
-        }
-        if (newJobDescription.getText().isEmpty()) {
-            newJobDescription.sendKeys(prop.getProperty("JobDescription"));
-        }
+        //if (newJobTitle.getText().isEmpty()) {
+        newJobTitle.sendKeys(prop.getProperty("JobTitle"));
 
+
+            newJobTitle.clear();
+            newJobTitle.sendKeys(prop.getProperty("2ndJobTitle"));
         Thread.sleep(1000);
 
-        if (newJobUploadSpecs.getText().isEmpty()) {
-            newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
-        }
+         // if (newJobDescription.getText().isEmpty()) {
+        newJobDescription.sendKeys(prop.getProperty("JobDescription"));
 
-        if (newJobNotes.getText().isEmpty()) {
+        Thread.sleep(2000);
+
+        // if (newJobUploadSpecs.getText().isEmpty()) {
+        //    newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
+
+
+      //  if (newJobNotes.getText().isEmpty()) {
             newJobNotes.sendKeys(prop.getProperty("JobNotes"));
 
 
-        }
         saveNewJob.click();
+
+
+        }
     }
 
-}
+
