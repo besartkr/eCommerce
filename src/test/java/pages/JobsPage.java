@@ -99,7 +99,8 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public void jobTitles() throws InterruptedException {
+    public void existingjobTitles() throws InterruptedException {
+
         boolean found = false;
 
         WebElement table = webDriver.findElement(By.id("resultTable"));
@@ -108,7 +109,7 @@ Selectors for the Jobs Admin tab
         for (WebElement job : jobs) {
             String text = job.getText();
             Thread.sleep(2000);
-            if (text.equalsIgnoreCase("Test Analyst1")) {
+            if (text.equalsIgnoreCase("CEO")) {
                 job.click();
                 found = true;
             }
@@ -118,16 +119,21 @@ Selectors for the Jobs Admin tab
         }
     }
 
+
+
+
+
+
     public void addNewJob() {
         addNewJob.click();
 
     }
-
     public void enterNewJobDetails() throws IOException, InterruptedException {
 
 
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        //FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
         ;
 
@@ -141,9 +147,9 @@ Selectors for the Jobs Admin tab
 
         Thread.sleep(1000);
 
-        if (newJobUploadSpecs.getText().isEmpty()) {
+       /* if (newJobUploadSpecs.getText().isEmpty()) {
             newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
-        }
+        }*/
 
         if (newJobNotes.getText().isEmpty()) {
             newJobNotes.sendKeys(prop.getProperty("JobNotes"));

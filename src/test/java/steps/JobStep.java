@@ -34,14 +34,27 @@ public class JobStep extends BaseUtil {
     @When("^I search for existing job title$")
     public void iSearchForExistingJobTitle() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
-        page.jobTitles();
+        page.existingjobTitles();
     }
 
     @And("^if the Job is not in the database table$")
     public void ifTheJobIsNotInTheDatabaseTable() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
       //  page.addNewJob();
+
+
+    }
+
+    @When("^I enter the details of the new job$")
+    public void iEnterTheDetailsOfTheNewJob() throws Throwable {
+        JobsPage page = new JobsPage(base.webDriver);
+        page.addNewJob();
         page.enterNewJobDetails();
+    }
+
+    @Then("^I'll update the job details have have them displayed in the database$")
+    public void iLlUpdateTheJobDetailsHaveHaveThemDisplayedInTheDatabase() throws Throwable {
+        JobsPage page = new JobsPage(base.webDriver);
 
     }
 }

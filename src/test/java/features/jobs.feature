@@ -12,18 +12,18 @@ Feature: Admin Jobs
 
 
   Scenario:
-    Given I navigate to the list of available jobs
-    When I search for existing job title
-  # Then  the Job Title will be displayed in the table
-
   @inProgress
-  Scenario:
+    Scenario: Add a new job in the database
+    Given I navigate to the list of available jobs
+    When I enter the details of the new job
+   # Then the job will be added in database
+
+  Scenario: Edit existing job in the database
     Given I navigate to the list of available jobs
     When I search for existing job title
-    And   if the Job is not in the database table
-    #Then I will add a new one
+    Then I'll update the job details have have them displayed in the database
 
-  Scenario:
+  Scenario: Delete existing job in the database
   #  Given I amend the job title of an employer
    # When I save the new job in the database
     #Then the Job title of the employer will be updated
