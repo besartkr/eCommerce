@@ -57,4 +57,11 @@ public class JobStep extends BaseUtil {
         JobsPage page = new JobsPage(base.webDriver);
 
     }
+
+    @Then("^the job will be added in database$")
+    public void theJobWillBeAddedInDatabase() throws Throwable {
+        JobsPage page = new JobsPage(base.webDriver);
+        page.assertNewJobAdded();
+
+        }
 }

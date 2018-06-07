@@ -85,6 +85,9 @@ Selectors for the Jobs Admin tab
     @FindBy(id = "btnSave")
     public WebElement saveNewJob;
 
+
+    @FindBy (css = "[class='message success fadable']")
+    public WebElement successMessage;
     public void adminTab() {
 
         Actions action = new Actions(webDriver);
@@ -140,6 +143,7 @@ Selectors for the Jobs Admin tab
         if (newJobTitle.getText().isEmpty()) {
             newJobTitle.sendKeys(prop.getProperty("JobTitle"));
 
+
         }
         if (newJobDescription.getText().isEmpty()) {
             newJobDescription.sendKeys(prop.getProperty("JobDescription"));
@@ -156,5 +160,13 @@ Selectors for the Jobs Admin tab
         }
         saveNewJob.click();
     }
+
+
+public void assertNewJobAdded () {
+
+
+  Assert.assertTrue(successMessage.isDisplayed());
+
+}
 
 }
