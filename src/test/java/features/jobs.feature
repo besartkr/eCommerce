@@ -16,7 +16,7 @@ Feature: Admin Jobs
     Scenario: Add a new job in the database
     Given I navigate to the list of available jobs
     When I enter the details of the new job
-   # Then the job will be added in database
+    Then the job will be added in database
 
   Scenario: Edit existing job in the database
     Given I navigate to the list of available jobs
