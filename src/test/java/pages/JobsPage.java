@@ -86,8 +86,13 @@ Selectors for the Jobs Admin tab
     public WebElement saveNewJob;
 
 
-    @FindBy (css = "[class='message success fadable']")
+    @FindBy(xpath = "//*[@id=\"frmSavejobTitle\"]/fieldset/ol/li[1]/span")
+    public WebElement validationError;
+
+
+    @FindBy(css = "[class='message success fadable']")
     public WebElement successMessage;
+
     public void adminTab() {
 
         Actions action = new Actions(webDriver);
@@ -123,14 +128,11 @@ Selectors for the Jobs Admin tab
     }
 
 
-
-
-
-
     public void addNewJob() {
         addNewJob.click();
 
     }
+
     public void enterNewJobDetails() throws IOException, InterruptedException {
 
 
@@ -140,28 +142,46 @@ Selectors for the Jobs Admin tab
         prop.load(file);
         ;
 
-        if (newJobTitle.getText().isEmpty()) {
-            newJobTitle.sendKeys(prop.getProperty("JobTitle"));
+
+        newJobTitle.sendKeys(prop.getProperty("JobTitle"));
+        Thread.sleep(2000);
 
 
+        if (!validationError.equals(null)) {
+
+            boolean expectedData = webDriver.findElement(By.xpath("//*[@id=\"frmSavejobTitle\"]/fieldset/ol/li[1]/span")).isDisplayed();
+
+            if (expectedData) {
+                newJobTitle.click();
+                newJobTitle.clear();
+                newJobTitle.sendKeys(prop.getProperty("2ndJobTitle"));
+            }
+            if (expectedData) {
+                newJobTitle.click();
+                newJobTitle.clear();
+                newJobTitle.sendKeys(prop.getProperty("3rdJobTitle"));
+
+            }
+
+            if (newJobDescription.getText().isEmpty()) {
+                newJobDescription.sendKeys(prop.getProperty("JobDescription"));
+
+            }
+
+
+            Thread.sleep(1000);
+
+            // if (newJobUploadSpecs.getText().isEmpty()) {
+            //    newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
+            //   }
+
+            if (newJobNotes.getText().isEmpty()) {
+                newJobNotes.sendKeys(prop.getProperty("JobNotes"));
+            }
+            saveNewJob.click();
         }
-        if (newJobDescription.getText().isEmpty()) {
-            newJobDescription.sendKeys(prop.getProperty("JobDescription"));
-        }
 
-        Thread.sleep(1000);
-
-       /* if (newJobUploadSpecs.getText().isEmpty()) {
-            newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
-        }*/
-
-        if (newJobNotes.getText().isEmpty()) {
-            newJobNotes.sendKeys(prop.getProperty("JobNotes"));
-        }
-        saveNewJob.click();
     }
-
-
 public void assertNewJobAdded () {
 
 
