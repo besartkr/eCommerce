@@ -93,6 +93,9 @@ Selectors for the Jobs Admin tab
     @FindBy(css = "[class='message success fadable']")
     public WebElement successMessage;
 
+    @FindBy(css = "[class='editButton']")
+    public WebElement editButton;
+
     public void adminTab() {
 
         Actions action = new Actions(webDriver);
@@ -108,27 +111,19 @@ Selectors for the Jobs Admin tab
     }
 
     public void existingjobTitles() throws InterruptedException {
-
-        boolean found = false;
-
         WebElement table = webDriver.findElement(By.id("resultTable"));
-        List<WebElement> jobs = table.findElements(By.tagName("a"));
+        List<WebElement> buttons = table.findElements(By.tagName("a"));
 
-        for (WebElement job : jobs) {
-            String text = job.getText();
-            Thread.sleep(2000);
-            if (text.equalsIgnoreCase("CEO")) {
-                job.click();
-                found = true;
+
+        for (WebElement b : buttons) {
+            if (b.getText().equals("CEO")){
+                b.click();
+                break;
             }
-        }
-        if (!found) {
-            addNewJob.click();
         }
     }
 
-
-    public void addNewJob() {
+  public void addNewJob() {
         addNewJob.click();
 
     }
@@ -137,8 +132,8 @@ Selectors for the Jobs Admin tab
 
 
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
-        //FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+      //  FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
         ;
 
@@ -189,4 +184,17 @@ public void assertNewJobAdded () {
 
 }
 
+public void editJobTitle() throws InterruptedException {
+    Thread.sleep(2000);
+
+    if (editButton.isDisplayed()) {
+        editButton.click();
+
+        if(!newJobTitle.isDisplayed()){
+            newJobTitle.clear();
+            newJobTitle.sendKeys("Senior Analyst");
+        }
+
+    }
 }
+    }

@@ -55,6 +55,7 @@ public class JobStep extends BaseUtil {
     @Then("^I'll update the job details have have them displayed in the database$")
     public void iLlUpdateTheJobDetailsHaveHaveThemDisplayedInTheDatabase() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
+       page.editJobTitle();
 
     }
 
