@@ -34,7 +34,7 @@ public class JobStep extends BaseUtil {
     @When("^I search for existing job title$")
     public void iSearchForExistingJobTitle() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
-        page.existingjobTitles();
+        page.existingJobTitles();
     }
 
     @And("^if the Job is not in the database table$")
@@ -56,6 +56,7 @@ public class JobStep extends BaseUtil {
     public void iLlUpdateTheJobDetailsHaveHaveThemDisplayedInTheDatabase() throws Throwable {
         JobsPage page = new JobsPage(base.webDriver);
        page.editJobTitle();
+        page.confirmChanges();
 
     }
 
@@ -65,4 +66,12 @@ public class JobStep extends BaseUtil {
         page.assertNewJobAdded();
 
         }
+
+    @When("^I delete a job title from the list$")
+    public void iDeleteAJobTitleFromTheList() throws Throwable {
+        JobsPage page = new JobsPage(base.webDriver);
+        page.selectAndDeleteJobTitle();
+
+
+    }
 }
