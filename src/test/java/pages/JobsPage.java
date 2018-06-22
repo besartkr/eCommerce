@@ -2,25 +2,16 @@ package pages;
 
 import Base.BaseUtil;
 import org.junit.Assert;
-import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Properties;
 
 public class JobsPage extends BaseUtil {
@@ -110,20 +101,19 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public void existingjobTitles() throws InterruptedException {
+    public void existingJobTitles() throws InterruptedException {
         WebElement table = webDriver.findElement(By.id("resultTable"));
         List<WebElement> buttons = table.findElements(By.tagName("a"));
 
-
         for (WebElement b : buttons) {
-            if (b.getText().equals("CEO")){
+            if (b.getText().equals("CEO")) {
                 b.click();
                 break;
             }
         }
     }
 
-  public void addNewJob() {
+    public void addNewJob() {
         addNewJob.click();
 
     }
@@ -132,8 +122,8 @@ Selectors for the Jobs Admin tab
 
 
         Properties prop = new Properties();
-      //  FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
         ;
 
@@ -177,24 +167,58 @@ Selectors for the Jobs Admin tab
         }
 
     }
-public void assertNewJobAdded () {
+
+    public void assertNewJobAdded() {
 
 
-  Assert.assertTrue(successMessage.isDisplayed());
+        Assert.assertTrue(successMessage.isDisplayed());
 
-}
+    }
 
-public void editJobTitle() throws InterruptedException {
-    Thread.sleep(2000);
+    public void editJobTitle() throws InterruptedException, IOException {
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
+        ;
 
-    if (editButton.isDisplayed()) {
-        editButton.click();
+        Thread.sleep(2000);
 
-        if(!newJobTitle.isDisplayed()){
-            newJobTitle.clear();
-            newJobTitle.sendKeys("Senior Analyst");
+        if (editButton.isDisplayed()) {
+            editButton.click();
+
         }
 
+        if (newJobTitle.isDisplayed()) {
+            newJobTitle.sendKeys(prop.getProperty("3rdJobTitle"));
+
+        }
+
+        if (newJobDescription.isDisplayed()) {
+            newJobDescription.sendKeys(prop.getProperty("JobDescription"));
+
+        }
+        if (newJobNotes.isDisplayed()) {
+            newJobNotes.sendKeys(prop.getProperty("JobNotes"));
+
+        }
+        saveNewJob.click();
+
+    }
+
+    public boolean confirmChanges() {
+        if (successMessage.isDisplayed()) {
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    public void selectAndDeleteJobTitle() {
+
     }
 }
-    }
+
+
