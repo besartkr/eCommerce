@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 public class JobsPage extends BaseUtil {
 
@@ -87,8 +88,17 @@ Selectors for the Jobs Admin tab
     @FindBy(css = "[class='editButton']")
     public WebElement editButton;
 
-    public void adminTab() {
+    @FindBy(id = "btnDelete")
+    public WebElement deleteButton;
 
+    @FindBy(id = "deleteConfModal")
+    public WebElement deleteWindow;
+
+    @FindBy(id = "dialogDeleteBtn")
+    public WebElement deleteConfirmation;
+
+    public void adminTab() throws InterruptedException {
+Thread.sleep(2000);
         Actions action = new Actions(webDriver);
 
         action.moveToElement(adminTab).build().perform();
@@ -102,6 +112,7 @@ Selectors for the Jobs Admin tab
     }
 
     public void existingJobTitles() throws InterruptedException {
+        Thread.sleep(2000);
         WebElement table = webDriver.findElement(By.id("resultTable"));
         List<WebElement> buttons = table.findElements(By.tagName("a"));
 
@@ -176,6 +187,7 @@ Selectors for the Jobs Admin tab
     }
 
     public void editJobTitle() throws InterruptedException, IOException {
+        Thread.sleep(2000);
         Properties prop = new Properties();
         FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
         //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
@@ -206,7 +218,8 @@ Selectors for the Jobs Admin tab
 
     }
 
-    public boolean confirmChanges() {
+    public boolean confirmChanges() throws InterruptedException {
+        Thread.sleep(2000);
         if (successMessage.isDisplayed()) {
 
             return true;
@@ -216,9 +229,25 @@ Selectors for the Jobs Admin tab
         }
     }
 
-    public void selectAndDeleteJobTitle() {
+    public void selectAndDeleteJobTitle() throws InterruptedException {
 
+            Thread.sleep(2000);
+
+        List<WebElement> allCheckbox = webDriver.findElements(By.id("ohrmList_chkSelectRecord_2"));
+
+        for (WebElement ele : allCheckbox) {
+            if (ele.isDisplayed()) {
+                ele.click();
+
+            }
+            if (ele.isSelected()) {
+                deleteButton.click();
+            }
+
+            if (deleteButton.isDisplayed()) {
+                deleteConfirmation.click();
+            }
+        }
     }
 }
-
 

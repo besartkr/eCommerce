@@ -74,4 +74,12 @@ public class JobStep extends BaseUtil {
 
 
     }
+
+    @Then("^The job Title no longer exists in the database$")
+    public void theJobTitleNoLongerExistsInTheDatabase() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+      JobsPage page = new  JobsPage(base.webDriver);
+      page.confirmChanges();
+
+    }
 }
