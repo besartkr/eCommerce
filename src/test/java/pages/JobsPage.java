@@ -104,9 +104,16 @@ Thread.sleep(2000);
         action.moveToElement(adminTab).build().perform();
         action.moveToElement(JobMenuSelector).build().perform();
         action.moveToElement(JobTItleListSelector).build().perform();
-        adminTab.click();
-        JobMenuSelector.click();
+        action.click(adminTab).perform();
+        action.click(JobMenuSelector).perform();
+        action.click(JobTItleListSelector).perform();
+
+
+       /* JobMenuSelector.click();
         JobTItleListSelector.click();
+        */
+
+
 
 
     }
@@ -218,16 +225,6 @@ Thread.sleep(2000);
 
     }
 
-    public boolean confirmChanges() throws InterruptedException {
-        Thread.sleep(2000);
-        if (successMessage.isDisplayed()) {
-
-            return true;
-
-        } else {
-            return false;
-        }
-    }
 
     public void selectAndDeleteJobTitle() throws InterruptedException {
 
@@ -248,6 +245,18 @@ Thread.sleep(2000);
                 deleteConfirmation.click();
             }
         }
+
     }
+    public boolean confirmChanges() throws InterruptedException {
+        Thread.sleep(2000);
+        if (successMessage.isDisplayed()) {
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
 }
 

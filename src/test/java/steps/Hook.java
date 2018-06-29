@@ -43,7 +43,7 @@ public class Hook extends BaseUtil {
 
         } else {
             if (prop.getProperty("browser").equals("internetExplorer")) {
-                System.setProperty("webdriver.ie.driver", "C:\\Users\\besart\\Downloads\\automation\\IEDriverServer_x64_3.12.0\\IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\IEDriverServer.exe");
                 base.webDriver = new InternetExplorerDriver();
             }
         }
@@ -53,7 +53,7 @@ public class Hook extends BaseUtil {
     @Given("^I navigate to the home page$")
     public void iNavigateToTheHomePage() throws Throwable {
 
-        base.webDriver.navigate().to("http://opensource.demo.orangehrmlive.com/index.php/auth/login");
+        base.webDriver.navigate().to("http://automationpractice.com/index.php");
 
     }
 

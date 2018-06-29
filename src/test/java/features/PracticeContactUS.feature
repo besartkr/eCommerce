@@ -3,20 +3,15 @@ Feature: LoginFeature
 
   Background:
     Given I navigate to the home page
-    When I enter the following for Login
-      | username | password |
-      | admin    | admin    |
-    And I click login button
-    Then I should see the welcome message
 
-  @ORangeHRM
+
+  @test
   Scenario: Login with correct username and add new Admin user
-    Given I navigate to the Admin tab
-    When I key the admin details
-      | EmployeeName | username | password | confirmpass |
-      | Fiona Grace  | besart   | admin    | admin       |
-    And I click Save button
-    Then I will see the details are saved in the table
+    Given I navigate to the contact us page
+    When I enter the deails in the Send A Message Form
+    And I sent the message
+    Then I will get a confirmation email
+
 
   @ORangeHRM
   Scenario: Login and delete an admin user that left the company

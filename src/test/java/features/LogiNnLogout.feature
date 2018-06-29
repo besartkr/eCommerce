@@ -9,7 +9,7 @@ Feature: LoginFeature
     And I click login button
     Then I should see the welcome message
 
-  @test
+  @ORangeHRM
   Scenario:
     Given  I navigate to the home page
     When I enter the following for Login

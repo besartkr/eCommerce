@@ -16,22 +16,22 @@ import java.util.List;
 
 public class LoginStep extends BaseUtil {
 
-    private BaseUtil webDriver;
+    private BaseUtil base;
 
     public LoginStep(BaseUtil webDriver) {
-        this.webDriver = webDriver;
+        this.base = webDriver;
     }
 
     @Then("^I should see the welcome message$")
     public void iShouldSeeTheWelcomeMessage() throws Throwable {
 
-        Assert.assertEquals("Its not displayed", webDriver.webDriver.findElement(By.cssSelector("[class='panelTrigger']")).isDisplayed(), true);
+        Assert.assertEquals("Its not displayed", base.webDriver.findElement(By.cssSelector("[class='panelTrigger']")).isDisplayed(), true);
     }
 
 
     @And("^I click login button$")
     public void iClickLoginButton() throws Throwable {
-        LoginPage page = new LoginPage(webDriver.webDriver);
+        LoginPage page = new LoginPage(base.webDriver);
         page.ClickLogin();
     }
 
@@ -43,7 +43,7 @@ public class LoginStep extends BaseUtil {
         //Store all the users
         users = table.asList(User.class);
 
-        LoginPage page = new LoginPage(webDriver.webDriver);
+        LoginPage page = new LoginPage(base.webDriver);
 
 
         for (User user : users) {
@@ -59,7 +59,7 @@ public class LoginStep extends BaseUtil {
 
     @And("^I click on the log out button to logout$")
     public void iClickOnTheLogOutButtonToLogout() throws Throwable {
-        LoginPage page = new LoginPage(webDriver.webDriver);
+        LoginPage page = new LoginPage(base.webDriver);
         page.logout();
     }
 
