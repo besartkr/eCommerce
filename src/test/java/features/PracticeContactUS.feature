@@ -8,9 +8,8 @@ Feature: LoginFeature
   @test
   Scenario: Login with correct username and add new Admin user
     Given I navigate to the contact us page
-    When I enter the deails in the Send A Message Form
-    And I sent the message
-    Then I will get a confirmation email
+    When I enter the  email address, orderRef & the Message
+    Then I will get a confirmation message
 
 
   @ORangeHRM
