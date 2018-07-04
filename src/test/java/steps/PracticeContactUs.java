@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.LoginPage;
 import pages.PracticeContactUSPage;
+import pages.PracticeLoginPage;
 
 
 public class PracticeContactUs extends BaseUtil {
@@ -46,5 +47,14 @@ public class PracticeContactUs extends BaseUtil {
     public void iWillGetAConfirmationMessage() throws Throwable {
         PracticeContactUSPage page = new PracticeContactUSPage(base.webDriver);
         page.sendMessage();
+    }
+
+    /*     Login page      */
+    @Given("^I navigate to the Login Page$")
+    public void iNavigateToTheLoginPage() throws Throwable {
+        PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
+        page.login();
+
+
     }
 }
