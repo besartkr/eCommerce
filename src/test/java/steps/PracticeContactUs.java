@@ -25,12 +25,10 @@ public class PracticeContactUs extends BaseUtil {
     }
 
 
-
-
     @Given("^I navigate to the contact us page$")
     public void iNavigateToTheContactUsPage() throws Throwable {
         PracticeContactUSPage page = new PracticeContactUSPage(base.webDriver);
-       page.contactUs();
+        page.contactUs();
 
     }
 
@@ -53,7 +51,7 @@ public class PracticeContactUs extends BaseUtil {
     @Given("^I navigate to the Login Page$")
     public void iNavigateToTheLoginPage() throws Throwable {
         PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
-        page.enterlogindetails();
+        page.loginLink();
 
 
     }
@@ -61,13 +59,16 @@ public class PracticeContactUs extends BaseUtil {
     @When("^I login as a register user$")
     public void iLoginAsARegisterUser() throws Throwable {
         PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
-        page.login();
+        page.loginEmail();
+        page.loginPassword();
+
 
     }
 
     @Then("^I will be taken to My Account page$")
     public void iWillBeTakenToMyAccountPage() throws Throwable {
         PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
-        page.verifyLogin();
+        page.loginSubmit();
     }
+
 }

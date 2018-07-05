@@ -31,9 +31,9 @@ public class Hook extends BaseUtil {
         prop.load(fis);
 
         if (prop.getProperty("browser").equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
+           System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
 
-            //  System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
+             //System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
             base.webDriver = new ChromeDriver();
 
         } else if
@@ -63,7 +63,7 @@ public class Hook extends BaseUtil {
             //Take screenshot logic goes here
             System.out.println(scenario.getName());
         }
-        System.out.println("Closing the browser : MOCK");
+
     }
 
 }

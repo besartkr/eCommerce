@@ -24,6 +24,9 @@ public class PracticeContactUSPage extends BaseUtil {
         PageFactory.initElements(webDriver, this);
     }
 
+    /*
+    Contact us selectors
+     */
 
     @FindBy(id = "contact-link")
     WebElement contactLink;
@@ -46,6 +49,7 @@ public class PracticeContactUSPage extends BaseUtil {
 
     @FindBy(css = "[class='alert alert-success']")
     WebElement successfullySent;
+
 
     public void contactUs() {
         contactLink.click();
@@ -102,6 +106,7 @@ public class PracticeContactUSPage extends BaseUtil {
         }
 
     }
+
 }
 
 

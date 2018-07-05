@@ -20,7 +20,9 @@ public class PracticeLoginPage extends BaseUtil {
         PageFactory.initElements(webDriver, this);
     }
 
-
+    /*
+    Login selectors
+     */
     @FindBy(css = "[class='login']")
     WebElement loginSelector;
 
@@ -39,7 +41,7 @@ public class PracticeLoginPage extends BaseUtil {
             Thread.sleep(2000);
             action.click(MenuTabServicDirectory).perform();
      */
-    public void enterlogindetails() throws Exception {
+    public void loginLink()  {
 
         loginSelector.click();
         Assert.assertEquals("Login - My Store", webDriver.getTitle());
@@ -48,22 +50,37 @@ public class PracticeLoginPage extends BaseUtil {
 
     }
 
-    public void login() throws Exception {
+    public WebElement loginEmail() throws Exception {
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
 
         prop.load(file);
 
         emailAddress.sendKeys(prop.getProperty("loginEmail"));
+
+        return emailAddress;
+
+    }
+
+    public WebElement loginPassword() throws Exception {
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+
+        prop.load(file);
+
         password.sendKeys(prop.getProperty("password"));
+        return password;
+    }
+
+
+    public void loginSubmit() {
         submitLogin.click();
-
+        Assert.assertEquals("My account - My Store", webDriver.getTitle());
     }
-    public void verifyLogin (){
-        Assert.assertEquals("My account - My Store",webDriver.getTitle());
 
 
-    }
+
+
 }
 
 
