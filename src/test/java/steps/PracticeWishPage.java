@@ -50,11 +50,17 @@ public class PracticeWishPage extends BaseUtil {
         page.wishListTable();
     }
 
-    @When("^I increase the product quantity$")
-    public void iIncreaseTheProductQuantity() throws Throwable {
+    @When("^I increase the product quantity To 10$")
+    public void iIncreaseTheProductQuantityTo10() throws Throwable {
         PracticePageWishPage page = new PracticePageWishPage(base.webDriver);
         page.wishListPage();
         page.wishListTable();
         page.orderDetail();
+    }
+
+    @Then("^the new quantity will be saved and displayed$")
+    public void theNewQuantityWillBeSavedAndDisplayed() throws Throwable {
+        PracticePageWishPage page = new PracticePageWishPage(base.webDriver);
+    page.updatedQty();
     }
 }

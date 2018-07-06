@@ -27,6 +27,6 @@ Feature: ContactUs feature
   @test
   Scenario: Ensure I can increase the quanity of the product I have in my WishList table
     Given I navigate to the WishList Page
-    When I increase the product quantity
-  #  Then the new quantity will be saved and displayed
+    When I increase the product quantity To 10
+    Then the new quantity will be saved and displayed
 

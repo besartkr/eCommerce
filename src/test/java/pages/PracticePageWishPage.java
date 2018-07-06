@@ -7,8 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.WeakHashMap;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 
 public class PracticePageWishPage extends BaseUtil {
@@ -57,6 +62,9 @@ public class PracticePageWishPage extends BaseUtil {
     @FindBy(id = "block-order-detail")
     WebElement orderDetailTable;
 
+    @FindBy(css = "[class='btn btn-default button button-small']")
+    WebElement saveChanges;
+
 
 /*
   Actions action = new Actions(webDriver);
@@ -64,6 +72,7 @@ public class PracticePageWishPage extends BaseUtil {
         Thread.sleep(2000);
         action.click(MenuTabServicDirectory).perform();
  */
+
 
     public WebElement wishListPage() {
         if (MyWishList.isDisplayed()) {
@@ -80,19 +89,22 @@ public class PracticePageWishPage extends BaseUtil {
 
     }
 
-    public void wishListTable() throws InterruptedException {
 
+    public void wishListTable() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
         Boolean isWishListPresent = webDriver.findElements(By.id("block-history")).size() != 0;
         if (isWishListPresent == true) {
-            System.out.println("Items in WishList table");
-            Thread.sleep(1000);
 
 
         } else {
+
             productSeletor.click();
-            Thread.sleep(1000);
+
+            wait.until(ExpectedConditions.visibilityOf(wishListButton));
+
+
             wishListButton.click();
-            Thread.sleep(1000);
+
             wishListAddConnfirmationBox.click();
 /*
 } else if (productSeletor.isDisplayed()) {
@@ -112,23 +124,52 @@ public class PracticePageWishPage extends BaseUtil {
         }
     }
 
-    public void orderDetail() throws InterruptedException {
-        Thread.sleep(1000);
+    public void orderDetail() throws IOException, InterruptedException {
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+
         if (vieworderDetailLink.isDisplayed()) {
             vieworderDetailLink.click();
             Assert.assertTrue(orderDetailTable.isDisplayed());
         }
+
         String Qty = orderQty.getText();
-        int n = Integer.parseInt(Qty);
+        int i = Integer.parseInt(Qty);
 
-        System.out.println("The existing qty is: " + n);
+        if (i <= 10)
+            System.out.println("Basket Quantity is: " + i);
 
-        Thread.sleep(1000);
-        orderQtyDetailTable.click();
-        String QtyDetail = orderQtyDetailTable.getText();
-        int qty = Integer.parseInt(QtyDetail);
-        if (qty == 2) ;
-        orderQtyDetailTable.sendKeys("10");
+        else {
+            wait.until(ExpectedConditions.visibilityOf(orderQtyDetailTable));
+            orderQtyDetailTable.click();
+        }
+        wait.until(ExpectedConditions.visibilityOf(orderQtyDetailTable));
+
+        if (orderQtyDetailTable.getText().contains("")) {
+            orderQtyDetailTable.clear();
+            orderQtyDetailTable.sendKeys(prop.getProperty("Qty"));
+
+            wait.until(ExpectedConditions.visibilityOf(saveChanges));
+
+            saveChanges.click();
+        } else {
+            wait.until(ExpectedConditions.visibilityOf(orderQtyDetailTable));
+
+            orderQtyDetailTable.sendKeys(prop.getProperty("Qty"));
+
+            saveChanges.click();
+
+        }
+
+
+    }
+
+    public void updatedQty() {
+        Assert.assertEquals(orderQty, orderQtyDetailTable);
     }
 }
 
