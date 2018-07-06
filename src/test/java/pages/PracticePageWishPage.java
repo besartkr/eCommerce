@@ -23,11 +23,10 @@ public class PracticePageWishPage extends BaseUtil {
         PageFactory.initElements(webDriver, this);
     }
 
-
     /*
-    WishList Selectors
+        WishList Selectors
 
-     */
+         */
     @FindBy(css = "[class='account']")
     WebElement MyAccount;
 
@@ -62,7 +61,7 @@ public class PracticePageWishPage extends BaseUtil {
     @FindBy(id = "block-order-detail")
     WebElement orderDetailTable;
 
-    @FindBy(css = "[class='btn btn-default button button-small']")
+    @FindBy(xpath = "//*[@id=\"wlp_2_7\"]/div/div[2]/div/div[2]/a/span")
     WebElement saveChanges;
 
 
@@ -124,18 +123,19 @@ public class PracticePageWishPage extends BaseUtil {
         }
     }
 
-    public void orderDetail() throws IOException, InterruptedException {
-        Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
-        //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
-        prop.load(file);
-
-        WebDriverWait wait = new WebDriverWait(webDriver, 3);
-
+    public void orderDetail() {
         if (vieworderDetailLink.isDisplayed()) {
             vieworderDetailLink.click();
             Assert.assertTrue(orderDetailTable.isDisplayed());
         }
+
+    }
+
+    public void orderDetailQty() throws IOException {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
 
         String Qty = orderQty.getText();
         int i = Integer.parseInt(Qty);
@@ -155,25 +155,20 @@ public class PracticePageWishPage extends BaseUtil {
 
             wait.until(ExpectedConditions.visibilityOf(saveChanges));
 
-            saveChanges.click();
-        } else {
-            wait.until(ExpectedConditions.visibilityOf(orderQtyDetailTable));
-
-            orderQtyDetailTable.sendKeys(prop.getProperty("Qty"));
-
-            saveChanges.click();
-
         }
 
 
     }
 
-    public void updatedQty() {
-        Assert.assertEquals(orderQty, orderQtyDetailTable);
+    public void assertNewQty() throws IOException {
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
+
+        saveChanges.click();
+        Assert.assertTrue(orderQty.getText().contains(prop.getProperty("Qty")));
     }
 }
-
-
 
 
 

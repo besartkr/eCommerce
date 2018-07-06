@@ -26,14 +26,14 @@ public class Hook extends BaseUtil {
     public void InitializeTest() throws IOException {
 
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
-        //FileInputStream fis = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        //FileInputStream fis = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream fis = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(fis);
 
         if (prop.getProperty("browser").equals("chrome")) {
-           System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
+           //System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart.kryeziu\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
 
-             //System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
+             System.setProperty("webdriver.chrome.driver", "C:\\Users\\besart\\Downloads\\automation\\chromedriver_win32\\chromedriver.exe");
             base.webDriver = new ChromeDriver();
 
         } else if

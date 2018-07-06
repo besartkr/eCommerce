@@ -25,8 +25,14 @@ Feature: ContactUs feature
 
 
   @test
-  Scenario: Ensure I can increase the quanity of the product I have in my WishList table
+  Scenario: Ensure I can increase the quantity of the product I have in my WishList table
     Given I navigate to the WishList Page
     When I increase the product quantity To 10
-    Then the new quantity will be saved and displayed
+   Then the new quantity will be saved and displayed
 
+
+  @ready
+  Scenario: Change the size of the product I have in my WishList Page
+    Given I navigate to the WishList Page
+    When I amend the size of the dress
+    Then the new size will be displayed on my product detail tab
