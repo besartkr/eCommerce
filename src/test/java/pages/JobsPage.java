@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -98,7 +100,9 @@ Selectors for the Jobs Admin tab
     public WebElement deleteConfirmation;
 
     public void adminTab() throws InterruptedException {
-Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        wait.until(ExpectedConditions.visibilityOf(adminTab));
+
         Actions action = new Actions(webDriver);
 
         action.moveToElement(adminTab).build().perform();
@@ -119,7 +123,9 @@ Thread.sleep(2000);
     }
 
     public void existingJobTitles() throws InterruptedException {
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver,3);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultTable")));
+
         WebElement table = webDriver.findElement(By.id("resultTable"));
         List<WebElement> buttons = table.findElements(By.tagName("a"));
 
@@ -137,7 +143,7 @@ Thread.sleep(2000);
     }
 
     public void enterNewJobDetails() throws IOException, InterruptedException {
-
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
 
         Properties prop = new Properties();
         FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
@@ -171,8 +177,7 @@ Thread.sleep(2000);
 
             }
 
-
-            Thread.sleep(1000);
+            wait.until(ExpectedConditions.visibilityOf(newJobNotes));
 
             // if (newJobUploadSpecs.getText().isEmpty()) {
             //    newJobUploadSpecs.sendKeys(prop.getProperty("JobUploadSpecs"));
