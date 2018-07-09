@@ -9,10 +9,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -64,6 +67,8 @@ public class PracticePageWishPage extends BaseUtil {
     @FindBy(xpath = "//*[@id=\"wlp_2_7\"]/div/div[2]/div/div[2]/a/span")
     WebElement saveChanges;
 
+    @FindBy(xpath = "//*[@id=\"priority_2_7\"]")
+    WebElement orderPrioritySelect;
 
 /*
   Actions action = new Actions(webDriver);
@@ -73,7 +78,7 @@ public class PracticePageWishPage extends BaseUtil {
  */
 
 
-    public WebElement wishListPage() {
+    public void wishListPage() {
         if (MyWishList.isDisplayed()) {
             MyWishList.click();
         } else if (MyAccount.isDisplayed()) {
@@ -84,7 +89,7 @@ public class PracticePageWishPage extends BaseUtil {
 
 
         Assert.assertEquals("My Store", webDriver.getTitle());
-        return MyWishList;
+
 
     }
 
@@ -166,9 +171,37 @@ public class PracticePageWishPage extends BaseUtil {
         prop.load(file);
 
         saveChanges.click();
-        Assert.assertTrue(orderQty.getText().contains(prop.getProperty("Qty")));
+
+        String newQty = orderQty.getText();
+        Assert.assertTrue(newQty.contains(prop.getProperty("Qty")));
     }
+
+    public void amendPriority() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        wait.until(ExpectedConditions.visibilityOf(orderPrioritySelect));
+
+        Select orderPriority = new Select(orderPrioritySelect);
+
+        //Verify Dropdown does not support multiple selection
+        Assert.assertFalse(orderPriority.isMultiple());
+        //Verify Dropdown has three options for selection
+        Assert.assertEquals(3, orderPriority.getOptions().size());
+
+        //We will verify Dropdown has expected values as listed in a array
+        List<String> exp_options = Arrays.asList(new String[]{"High", "Medium", "Low"});
+        System.out.println("The existing order priority are: " + exp_options);
+        //select from List
+        orderPriority.selectByVisibleText("High");
+
+    }
+public void assertPriority() {
+
+        saveChanges.click();
+
+    Assert.assertTrue(orderPrioritySelect.getText().contains("High"));
 }
+}
+
 
 
 

@@ -24,15 +24,13 @@ Feature: ContactUs feature
     Then  I will see list of WishList items on my WishList table
 
 
-  @test
+  @ready
   Scenario: Ensure I can increase the quantity of the product I have in my WishList table
     Given I navigate to the WishList Page
     When I increase the product quantity To 10
-   Then the new quantity will be saved and displayed
+    Then the new quantity will be saved and displayed
 
-
-  @ready
-  Scenario: Change the size of the product I have in my WishList Page
-    Given I navigate to the WishList Page
-    When I amend the size of the dress
-    Then the new size will be displayed on my product detail tab
+    @ready
+    Scenario: Increase the priority of the order
+      Given I navigate to the WishList Page
+      When I amend the priority of the order
