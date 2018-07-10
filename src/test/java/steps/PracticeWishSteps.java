@@ -12,11 +12,11 @@ import pages.PracticePageWishPage;
 import org.junit.Test;
 
 
-public class PracticeWishPage extends BaseUtil {
+public class PracticeWishSteps extends BaseUtil {
 
     private BaseUtil base;
 
-    public PracticeWishPage(BaseUtil webDriver) {
+    public PracticeWishSteps(BaseUtil webDriver) {
         this.base = webDriver;
     }
 

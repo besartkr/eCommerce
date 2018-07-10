@@ -24,7 +24,7 @@ Feature: ContactUs feature
     Then  I will see list of WishList items on my WishList table
 
 
-  @test
+  @ready
   Scenario: Ensure I can increase the quanity of the product I have in my WishList table
     Given I navigate to the WishList Page
     When I increase the product quantity To 10
