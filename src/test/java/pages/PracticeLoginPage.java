@@ -52,7 +52,8 @@ public class PracticeLoginPage extends BaseUtil {
 
     public WebElement loginEmail() throws Exception {
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+//        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
 
         prop.load(file);
 
@@ -64,7 +65,8 @@ public class PracticeLoginPage extends BaseUtil {
 
     public WebElement loginPassword() throws Exception {
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+     //   FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
 
         prop.load(file);
 

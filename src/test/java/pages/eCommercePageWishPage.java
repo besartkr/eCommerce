@@ -9,10 +9,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -23,11 +26,10 @@ public class eCommercePageWishPage extends BaseUtil {
         PageFactory.initElements(webDriver, this);
     }
 
-
     /*
-    WishList Selectors
+        WishList Selectors
 
-     */
+         */
     @FindBy(css = "[class='account']")
     WebElement MyAccount;
 
@@ -62,9 +64,11 @@ public class eCommercePageWishPage extends BaseUtil {
     @FindBy(id = "block-order-detail")
     WebElement orderDetailTable;
 
-    @FindBy(css = "[class='btn btn-default button button-small']")
+    @FindBy(xpath = "//*[@id=\"wlp_2_7\"]/div/div[2]/div/div[2]/a/span")
     WebElement saveChanges;
 
+    @FindBy(xpath = "//*[@id=\"priority_2_7\"]")
+    WebElement orderPrioritySelect;
 
 /*
   Actions action = new Actions(webDriver);
@@ -74,7 +78,7 @@ public class eCommercePageWishPage extends BaseUtil {
  */
 
 
-    public WebElement wishListPage() {
+    public void wishListPage() {
         if (MyWishList.isDisplayed()) {
             MyWishList.click();
         } else if (MyAccount.isDisplayed()) {
@@ -85,7 +89,7 @@ public class eCommercePageWishPage extends BaseUtil {
 
 
         Assert.assertEquals("My Store", webDriver.getTitle());
-        return MyWishList;
+
 
     }
 
@@ -124,18 +128,19 @@ public class eCommercePageWishPage extends BaseUtil {
         }
     }
 
-    public void orderDetail() throws IOException, InterruptedException {
-        Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
-        //  FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
-        prop.load(file);
-
-        WebDriverWait wait = new WebDriverWait(webDriver, 3);
-
+    public void orderDetail() {
         if (vieworderDetailLink.isDisplayed()) {
             vieworderDetailLink.click();
             Assert.assertTrue(orderDetailTable.isDisplayed());
         }
+
+    }
+
+    public void orderDetailQty() throws IOException {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
 
         String Qty = orderQty.getText();
         int i = Integer.parseInt(Qty);
@@ -155,24 +160,47 @@ public class eCommercePageWishPage extends BaseUtil {
 
             wait.until(ExpectedConditions.visibilityOf(saveChanges));
 
-            saveChanges.click();
-        } else {
-            wait.until(ExpectedConditions.visibilityOf(orderQtyDetailTable));
-
-            orderQtyDetailTable.sendKeys(prop.getProperty("Qty"));
-
-            saveChanges.click();
-
         }
 
 
     }
 
-    public void updatedQty() {
-        Assert.assertEquals(orderQty, orderQtyDetailTable);
-    }
-}
+    public void assertNewQty() throws IOException {
+        Properties prop = new Properties();
+        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        prop.load(file);
 
+        saveChanges.click();
+
+        String newQty = orderQty.getText();
+        Assert.assertTrue(newQty.contains(prop.getProperty("Qty")));
+    }
+
+    public void amendPriority() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        wait.until(ExpectedConditions.visibilityOf(orderPrioritySelect));
+
+        Select orderPriority = new Select(orderPrioritySelect);
+
+        //Verify Dropdown does not support multiple selection
+        Assert.assertFalse(orderPriority.isMultiple());
+        //Verify Dropdown has three options for selection
+        Assert.assertEquals(3, orderPriority.getOptions().size());
+
+        //We will verify Dropdown has expected values as listed in a array
+        List<String> exp_options = Arrays.asList(new String[]{"High", "Medium", "Low"});
+        System.out.println("The existing order priority are: " + exp_options);
+        //select from List
+        orderPriority.selectByVisibleText("High");
+
+    }
+public void assertPriority() {
+
+        saveChanges.click();
+
+    Assert.assertTrue(orderPrioritySelect.getText().contains("High"));
+}
+}
 
 
 
