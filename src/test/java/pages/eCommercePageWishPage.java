@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class PracticePageWishPage extends BaseUtil {
+public class eCommercePageWishPage extends BaseUtil {
 
-    public PracticePageWishPage(WebDriver webDriver) {
+    public eCommercePageWishPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
