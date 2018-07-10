@@ -16,11 +16,11 @@ import pages.PracticeContactUSPage;
 import pages.PracticeLoginPage;
 
 
-public class PracticeContactUs extends BaseUtil {
+public class eCommerceContactUsSteps extends BaseUtil {
 
     private BaseUtil base;
 
-    public PracticeContactUs(BaseUtil webDriver) {
+    public eCommerceContactUsSteps(BaseUtil webDriver) {
         this.base = webDriver;
     }
 
