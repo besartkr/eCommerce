@@ -167,7 +167,7 @@ public class eCommercePageWishPage extends BaseUtil {
 
     public void assertNewQty() throws IOException {
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\eCommerce\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
 
         saveChanges.click();

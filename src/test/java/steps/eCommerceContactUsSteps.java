@@ -2,18 +2,12 @@
 package steps;
 
 import Base.BaseUtil;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.LoginPage;
 import pages.PracticeContactUSPage;
-import pages.PracticeLoginPage;
+import pages.eCommerceLoginPage;
 
 
 public class eCommerceContactUsSteps extends BaseUtil {
@@ -50,7 +44,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
     /*     Login page      */
     @Given("^I navigate to the Login Page$")
     public void iNavigateToTheLoginPage() throws Throwable {
-        PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
+        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
         page.loginLink();
 
 
@@ -58,7 +52,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
 
     @When("^I login as a register user$")
     public void iLoginAsARegisterUser() throws Throwable {
-        PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
+        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
         page.loginEmail();
         page.loginPassword();
 
@@ -67,7 +61,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
 
     @Then("^I will be taken to My Account page$")
     public void iWillBeTakenToMyAccountPage() throws Throwable {
-        PracticeLoginPage page = new PracticeLoginPage(base.webDriver);
+        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
         page.loginSubmit();
     }
 
