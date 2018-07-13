@@ -98,7 +98,7 @@ public class eCommercePageWishPage extends BaseUtil {
         WebDriverWait wait = new WebDriverWait(webDriver, 3);
         Boolean isWishListPresent = webDriver.findElements(By.id("block-history")).size() != 0;
         if (isWishListPresent == true) {
-
+System.out.println("already have items in the wishList");
 
         } else {
 
@@ -139,7 +139,8 @@ public class eCommercePageWishPage extends BaseUtil {
     public void orderDetailQty() throws IOException {
         WebDriverWait wait = new WebDriverWait(webDriver, 3);
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+        //FileInputStream file = new FileInputStream("C:\\Users\\besart\\Desktop\\firstCommit\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
 
         String Qty = orderQty.getText();
@@ -167,7 +168,8 @@ public class eCommercePageWishPage extends BaseUtil {
 
     public void assertNewQty() throws IOException {
         Properties prop = new Properties();
-        FileInputStream file = new FileInputStream("C:\\eCommerce\\src\\test\\java\\pages\\datadriven.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\besart.kryeziu\\Desktop\\myFirst\\src\\test\\java\\pages\\datadriven.properties");
+       // FileInputStream file = new FileInputStream("C:\\eCommerce\\src\\test\\java\\pages\\datadriven.properties");
         prop.load(file);
 
         saveChanges.click();

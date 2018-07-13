@@ -64,12 +64,14 @@ public class eCommerceWishSteps extends BaseUtil {
     @When("^I amend the priority of the order$")
     public void iAmendThePriorityOfTheOrder() throws Throwable {
         eCommercePageWishPage page = new eCommercePageWishPage(base.webDriver);
+        iAddItemsToMyWishList();
+        page.orderDetail();
         page.amendPriority();
 
     }
 
     @Then("^the new priority will be displayed on the order$")
-    public void theNewPriorityWillBeDisplayedOnTheOrder() throws Throwable {
+    public void theNewPriorityWillBeDisplayedOnTheOrder()  {
         eCommercePageWishPage page = new eCommercePageWishPage(base.webDriver);
 
         page.assertPriority();
