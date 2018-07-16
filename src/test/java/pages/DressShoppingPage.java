@@ -33,6 +33,38 @@ public class DressShoppingPage extends BaseUtil {
     @FindBy(css = "[class='heading-counter']")
     WebElement DressExists;
 
+    /* Add Casual dress to Basket */
+
+    @FindBy(css = "[class='available-now']")
+    WebElement inStock;
+
+    @FindBy(css = "[class='button ajax_add_to_cart_button btn btn-default']")
+    WebElement addToCart;
+
+    @FindBy(css = "[class='icon-ok']")
+    WebElement addToCartValidation;
+
+    @FindBy(css = "[class='ajax_cart_no_product']")
+    WebElement checkIframe;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
+    WebElement cartTable;
+
+    @FindBy(css = "[class='cross']")
+    WebElement closeAddPrduct;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]")
+    WebElement cartSize;
+
+    @FindBy(id = "button_order_cart")
+    WebElement buttonOrderCart;
+
+    /*
+    ProcessToCheckOut
+     */
+    @FindBy(className = "[class='button btn btn-default standard-checkout button-medium']")
+    WebElement ProceedToCheckOut;
+
 
     public void DressSelector() {
         DressesSelector.click();
@@ -62,10 +94,65 @@ public class DressShoppingPage extends BaseUtil {
             return true;
         } else {
 
-         return false;
+            return false;
+        }
+    }
+
+    public void addtoBasket() {
+
+        Boolean inStockSelector = inStock.isDisplayed();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        if (inStockSelector == true) {
+            Actions action = new Actions(webDriver);
+            action.moveToElement(addToCart).perform();
+            action.click(addToCart).perform();
+
+            wait.until(ExpectedConditions.visibilityOf(addToCartValidation));
+            Assert.assertTrue(addToCartValidation.isDisplayed());
+
+        }
+    }
+
+    public void iframeDisplay() {
+
+        Boolean cartTable1 = cartTable.isDisplayed();
+        if (cartTable1 == true) {
+
+            closeAddPrduct.click();
+
+        }
+
+    }
+
+    public void placeOrder() {
+
+/*        String cartQty = cartSize.getText();
+
+        int i = Integer.parseInt(cartQty);
+
+        if (i <= 0) {
+            System.out.println("Basket Quantity is: " + i);
+
+        } else {
+            if (i >= 1){
+*/
+        WebDriverWait wait = new WebDriverWait(webDriver, 2);
+        Actions action = new Actions(webDriver);
+        action.moveToElement(cartTable).perform();
+        wait.until(ExpectedConditions.visibilityOf(buttonOrderCart));
+        buttonOrderCart.click();
+    }
+
+    public void proceedToCheckOut() {
+
+        if (ProceedToCheckOut.isDisplayed()) {
+            ProceedToCheckOut.click();
         }
     }
 }
+
+
 
 
 
