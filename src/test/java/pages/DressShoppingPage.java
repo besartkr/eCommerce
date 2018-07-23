@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.eCommerceContactUsSteps;
 
 
 public class DressShoppingPage extends BaseUtil {
@@ -18,6 +19,7 @@ public class DressShoppingPage extends BaseUtil {
     public DressShoppingPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+
     }
 
     /*
@@ -62,9 +64,21 @@ public class DressShoppingPage extends BaseUtil {
     /*
     ProcessToCheckOut
      */
-    @FindBy(className = "[class='button btn btn-default standard-checkout button-medium']")
+    @FindBy(css = "[class='button btn btn-default standard-checkout button-medium']")
     WebElement ProceedToCheckOut;
 
+
+    @FindBy(css = "[class='icon-lock left']")
+    WebElement checkifSignedIn;
+
+    @FindBy(css = "step_current third")
+    WebElement step03Address;
+
+    @FindBy(css = "step_current four")
+    WebElement step04Shipping;
+
+    @FindBy(css = "step_current step")
+    WebElement step05Payment;
 
     public void DressSelector() {
         DressesSelector.click();
@@ -126,8 +140,9 @@ public class DressShoppingPage extends BaseUtil {
     }
 
     public void placeOrder() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
 
-/*        String cartQty = cartSize.getText();
+        String cartQty = cartSize.getText();
 
         int i = Integer.parseInt(cartQty);
 
@@ -135,22 +150,40 @@ public class DressShoppingPage extends BaseUtil {
             System.out.println("Basket Quantity is: " + i);
 
         } else {
-            if (i >= 1){
-*/
-        WebDriverWait wait = new WebDriverWait(webDriver, 2);
-        Actions action = new Actions(webDriver);
-        action.moveToElement(cartTable).perform();
-        wait.until(ExpectedConditions.visibilityOf(buttonOrderCart));
-        buttonOrderCart.click();
-    }
 
-    public void proceedToCheckOut() {
-
-        if (ProceedToCheckOut.isDisplayed()) {
-            ProceedToCheckOut.click();
+            Actions action = new Actions(webDriver);
+            action.moveToElement(cartTable).perform();
+            wait.until(ExpectedConditions.visibilityOf(buttonOrderCart));
+            buttonOrderCart.click();
         }
     }
+
+    public void SummaryAndSignIn() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(webDriver, 2);
+        wait.until(ExpectedConditions.visibilityOf(ProceedToCheckOut));
+
+        ProceedToCheckOut.click();
+
+        Boolean SignedInDisplay = checkifSignedIn.isDisplayed();
+
+        if (SignedInDisplay == true) {
+
+            eCommerceContactUsSteps loginPage = new eCommerceContactUsSteps(this);
+            loginPage.iLoginAsARegisterUser();
+            loginPage.iWillBeTakenToMyAccountPage();
+
+        }
+
+    }
+    public void addressStage () {
+        if (step03Address.isDisplayed()){
+
+
+        }
+
+    }
 }
+
 
 
 

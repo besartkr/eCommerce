@@ -72,12 +72,13 @@ public class eCommerceLoginPage extends BaseUtil {
 
         password.sendKeys(prop.getProperty("password"));
         return password;
+
     }
 
 
     public void loginSubmit() {
         submitLogin.click();
-        Assert.assertEquals("My account - My Store", webDriver.getTitle());
+
     }
 
 

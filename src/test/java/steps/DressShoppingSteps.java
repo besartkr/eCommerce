@@ -3,6 +3,7 @@ package steps;
 
 import Base.BaseUtil;
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -10,6 +11,7 @@ import pages.DressShoppingPage;
 
 
 public class DressShoppingSteps extends BaseUtil {
+    DressShoppingPage page = new DressShoppingPage(webDriver);
 
     private BaseUtil base;
 
@@ -24,7 +26,7 @@ public class DressShoppingSteps extends BaseUtil {
      */
     @Given("^I navigate to Dresses page$")
     public void iNavigateToDressesPage() throws Throwable {
-        DressShoppingPage page = new DressShoppingPage(base.webDriver);
+
         page.DressSelector();
     }
 
@@ -40,8 +42,8 @@ public class DressShoppingSteps extends BaseUtil {
     }
 
 
-    @When("^I add to cart$")
-    public void iAddToCart() throws Throwable {
+    @When("^I add Casual Dress to Cart")
+    public void iAddCasualDressToCart() throws Throwable {
 DressShoppingPage page = new DressShoppingPage(base.webDriver);
     page.CasualDressSelector();
     page.addtoBasket();
@@ -60,8 +62,20 @@ DressShoppingPage page = new DressShoppingPage(base.webDriver);
     @Then("^the Dress will be added to the Shopping basket$")
     public void theDressWillBeAddedToTheShoppingBasket() throws Throwable {
         DressShoppingPage page = new DressShoppingPage(base.webDriver);
+
+
+    }
+
+    /**********
+     * AMD STATEMENTS
+     *
+     * ********/
+    @And("^I sign in to the checkout process$")
+    public void iSignInToTheCheckoutProcess() throws Throwable {
+        DressShoppingPage page = new DressShoppingPage(base.webDriver);
         page.iframeDisplay();
         page.placeOrder();
-        page.proceedToCheckOut();
+        page.SummaryAndSignIn();
+
     }
 }
