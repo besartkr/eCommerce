@@ -72,4 +72,10 @@ public class DressShoppingSteps extends BaseUtil {
         page.SummaryAndSignIn();
 
     }
+
+    @And("^the Delivery and Billing address are the same$")
+    public void theDeliveryAndBillingAddressAreTheSame() throws Throwable {
+      DressShoppingPage page = new DressShoppingPage(base.webDriver);
+      page.compareAddressMatch();
+    }
 }

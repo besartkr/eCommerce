@@ -53,7 +53,7 @@ public class DressShoppingPage extends BaseUtil {
     WebElement cartTable;
 
     @FindBy(css = "[class='cross']")
-    WebElement closeAddPrduct;
+     WebElement  closeAddPrduct;
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]")
     WebElement cartSize;
@@ -79,6 +79,30 @@ public class DressShoppingPage extends BaseUtil {
 
     @FindBy(css = "step_current step")
     WebElement step05Payment;
+
+
+    /*
+    Your Delivery Address
+     */
+
+    @FindBy(css = "[class='address item box'] [class='address_firstname address_lastname']")
+    WebElement AddressfirstName;
+
+    @FindBy(css = "[class='address item box'] [class='address_address1 address_address2']")
+    WebElement Address2ndLine;
+
+    @FindBy(css = "[class='address item box'] [class='address_city address_state_name address_postcode']")
+    WebElement AddressCity;
+
+    @FindBy(css = "[class='address item box'] [class='address_country_name']")
+    WebElement AddresCountry;
+
+    @FindBy(css = "[class='address item box'] [class='address_phone']")
+    WebElement AddressMobileNum;
+
+    @FindBy(css = "[class='address item box'] [class='address_phone_mobile']")
+    WebElement AddressHomeNum;
+
 
     public void DressSelector() {
         DressesSelector.click();
@@ -166,6 +190,7 @@ public class DressShoppingPage extends BaseUtil {
         ProceedToCheckOut.click();
         Boolean SignedInDisplay = checkifSignedIn.isDisplayed();
 
+
         if (SignedInDisplay == true) {
 
             ECommerceContactUsSteps page = new ECommerceContactUsSteps(this);
@@ -183,6 +208,11 @@ public class DressShoppingPage extends BaseUtil {
 
 
         }
+
+    }
+
+    public void compareAddressMatch() {
+
 
     }
 }
