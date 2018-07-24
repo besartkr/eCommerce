@@ -7,10 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.ECommerceContactUsSteps;
+import steps.Hook;
 
 
 public class DressShoppingPage extends BaseUtil {
@@ -19,6 +20,7 @@ public class DressShoppingPage extends BaseUtil {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
+
 
     /*
     Contact us selectors
@@ -33,6 +35,50 @@ public class DressShoppingPage extends BaseUtil {
     @FindBy(css = "[class='heading-counter']")
     WebElement DressExists;
 
+    /* Add Casual dress to Basket */
+
+    @FindBy(css = "[class='available-now']")
+    WebElement inStock;
+
+    @FindBy(css = "[class='button ajax_add_to_cart_button btn btn-default']")
+    WebElement addToCart;
+
+    @FindBy(css = "[class='icon-ok']")
+    WebElement addToCartValidation;
+
+    @FindBy(css = "[class='ajax_cart_no_product']")
+    WebElement checkIframe;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
+    WebElement cartTable;
+
+    @FindBy(css = "[class='cross']")
+    WebElement closeAddPrduct;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]")
+    WebElement cartSize;
+
+    @FindBy(id = "button_order_cart")
+    WebElement buttonOrderCart;
+
+    /*
+    ProcessToCheckOut
+     */
+    @FindBy(css = "[class='button btn btn-default standard-checkout button-medium']")
+    WebElement ProceedToCheckOut;
+
+
+    @FindBy(css = "[class='icon-lock left']")
+    WebElement checkifSignedIn;
+
+    @FindBy(css = "step_current third")
+    WebElement step03Address;
+
+    @FindBy(css = "step_current four")
+    WebElement step04Shipping;
+
+    @FindBy(css = "step_current step")
+    WebElement step05Payment;
 
     public void DressSelector() {
         DressesSelector.click();
@@ -62,8 +108,82 @@ public class DressShoppingPage extends BaseUtil {
             return true;
         } else {
 
-         return false;
+            return false;
         }
+    }
+
+    public void addtoBasket() {
+
+        Boolean inStockSelector = inStock.isDisplayed();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        if (inStockSelector == true) {
+            Actions action = new Actions(webDriver);
+            action.moveToElement(addToCart).perform();
+            action.click(addToCart).perform();
+
+            wait.until(ExpectedConditions.visibilityOf(addToCartValidation));
+            Assert.assertTrue(addToCartValidation.isDisplayed());
+
+        }
+    }
+
+    public void iframeDisplay() {
+
+        Boolean cartTable1 = cartTable.isDisplayed();
+        if (cartTable1 == true) {
+
+            closeAddPrduct.click();
+
+        }
+
+    }
+
+    public void placeOrder() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+
+        String cartQty = cartSize.getText();
+
+        int i = Integer.parseInt(cartQty);
+
+        if (i <= 0) {
+            System.out.println("Basket Quantity is: " + i);
+
+        } else {
+
+            Actions action = new Actions(webDriver);
+            action.moveToElement(cartTable).perform();
+            wait.until(ExpectedConditions.visibilityOf(buttonOrderCart));
+            buttonOrderCart.click();
+        }
+    }
+
+
+    public void SummaryAndSignIn() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(webDriver, 2);
+        wait.until(ExpectedConditions.visibilityOf(ProceedToCheckOut));
+
+        ProceedToCheckOut.click();
+        Boolean SignedInDisplay = checkifSignedIn.isDisplayed();
+
+        if (SignedInDisplay == true) {
+
+            ECommerceContactUsSteps page = new ECommerceContactUsSteps(this);
+            page.iLoginAsARegisterUser();
+            page.iWillBeTakenToMyAccountPage();
+
+
+        }
+
+    }
+
+
+    public void addressStage() {
+        if (step03Address.isDisplayed()) {
+
+
+        }
+
     }
 }
 

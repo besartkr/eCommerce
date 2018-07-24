@@ -7,14 +7,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import pages.PracticeContactUSPage;
-import pages.eCommerceLoginPage;
+import pages.ECommerceLoginPage;
 
 
-public class eCommerceContactUsSteps extends BaseUtil {
+public class ECommerceContactUsSteps extends BaseUtil {
 
     private BaseUtil base;
 
-    public eCommerceContactUsSteps(BaseUtil webDriver) {
+    public ECommerceContactUsSteps(BaseUtil webDriver) {
         this.base = webDriver;
     }
 
@@ -44,7 +44,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
     /*     Login page      */
     @Given("^I navigate to the Login Page$")
     public void iNavigateToTheLoginPage() throws Throwable {
-        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
+        ECommerceLoginPage page = new ECommerceLoginPage(base.webDriver);
         page.loginLink();
 
 
@@ -52,7 +52,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
 
     @When("^I login as a register user$")
     public void iLoginAsARegisterUser() throws Throwable {
-        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
+        ECommerceLoginPage page = new ECommerceLoginPage(base.webDriver);
         page.loginEmail();
         page.loginPassword();
 
@@ -61,7 +61,7 @@ public class eCommerceContactUsSteps extends BaseUtil {
 
     @Then("^I will be taken to My Account page$")
     public void iWillBeTakenToMyAccountPage() throws Throwable {
-        eCommerceLoginPage page = new eCommerceLoginPage(base.webDriver);
+        ECommerceLoginPage page = new ECommerceLoginPage(base.webDriver);
         page.loginSubmit();
     }
 

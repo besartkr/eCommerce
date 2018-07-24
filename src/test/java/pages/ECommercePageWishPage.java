@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Properties;
 
 
-public class eCommercePageWishPage extends BaseUtil {
+public class ECommercePageWishPage extends BaseUtil {
 
-    public eCommercePageWishPage(WebDriver webDriver) {
+    public ECommercePageWishPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
