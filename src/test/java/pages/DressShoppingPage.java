@@ -122,6 +122,16 @@ public class DressShoppingPage extends BaseUtil {
     WebElement BillAddressHomeNum;
 
 
+    @FindBy(css = "[class='bankwire']")
+    WebElement PayByBankWire;
+
+    @FindBy(css = "[class='button btn btn-default button-medium']")
+    WebElement confirmPayByBankWire;
+
+    @FindBy(css = "[class='cheque-indent']")
+    WebElement confirmationPayment;
+
+
     /*
     Shipping
      */
@@ -291,8 +301,15 @@ public class DressShoppingPage extends BaseUtil {
 
     public void paymentPage() {
 
-        Assert.assertTrue(step05Payment.isDisplayed());
+        if (step05Payment.isDisplayed()) {
+            PayByBankWire.click();
+            confirmPayByBankWire.click();
+        }
+
+        Assert.assertTrue(confirmationPayment.getText().contains("Your order on My Store is complete."));
+
     }
+
 }
 
 
