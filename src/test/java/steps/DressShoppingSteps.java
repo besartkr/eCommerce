@@ -56,6 +56,7 @@ public class DressShoppingSteps extends BaseUtil {
     @Then("^the Dress will be added to the Shopping basket$")
     public void theDressWillBeAddedToTheShoppingBasket() throws Throwable {
         DressShoppingPage page = new DressShoppingPage(base.webDriver);
+        page.paymentPage();
 
 
     }
@@ -76,6 +77,15 @@ public class DressShoppingSteps extends BaseUtil {
     @And("^the Delivery and Billing address are the same$")
     public void theDeliveryAndBillingAddressAreTheSame() throws Throwable {
       DressShoppingPage page = new DressShoppingPage(base.webDriver);
-      page.compareAddressMatch();
+      if (page.compareAddressMatch()){
+          page.goToShipping();
+      }
+    }
+
+    @And("^I complete the Shipping and payment details$")
+    public void iCompleteTheShippingAndPaymentDetails() throws Throwable {
+    DressShoppingPage page = new DressShoppingPage(base.webDriver);
+
+    page.ShippingAddress();
     }
 }

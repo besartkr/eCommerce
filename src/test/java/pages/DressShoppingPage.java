@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.ECommerceContactUsSteps;
-import steps.Hook;
 
 
 public class DressShoppingPage extends BaseUtil {
@@ -53,7 +52,7 @@ public class DressShoppingPage extends BaseUtil {
     WebElement cartTable;
 
     @FindBy(css = "[class='cross']")
-     WebElement  closeAddPrduct;
+    WebElement closeAddPrduct;
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a/span[1]")
     WebElement cartSize;
@@ -74,35 +73,61 @@ public class DressShoppingPage extends BaseUtil {
     @FindBy(css = "step_current third")
     WebElement step03Address;
 
-    @FindBy(css = "step_current four")
+    @FindBy(name = "processAddress")
     WebElement step04Shipping;
 
-    @FindBy(css = "step_current step")
+    @FindBy(css = "[class='step_current last']")
     WebElement step05Payment;
 
 
+    @FindBy(id = "addressesAreEquals")
+    WebElement addressNotEquals;
     /*
     Your Delivery Address
      */
 
     @FindBy(css = "[class='address item box'] [class='address_firstname address_lastname']")
-    WebElement AddressfirstName;
+    WebElement DevAddressfirstName;
 
     @FindBy(css = "[class='address item box'] [class='address_address1 address_address2']")
-    WebElement Address2ndLine;
+    WebElement DevAddress2ndLine;
+
 
     @FindBy(css = "[class='address item box'] [class='address_city address_state_name address_postcode']")
-    WebElement AddressCity;
+    WebElement DevAddressCity;
+
 
     @FindBy(css = "[class='address item box'] [class='address_country_name']")
-    WebElement AddresCountry;
-
-    @FindBy(css = "[class='address item box'] [class='address_phone']")
-    WebElement AddressMobileNum;
+    WebElement DevAddresCountry;
 
     @FindBy(css = "[class='address item box'] [class='address_phone_mobile']")
-    WebElement AddressHomeNum;
+    WebElement DevAddressHomeNum;
 
+    /* Your payment Address */
+
+    @FindBy(css = "[class='address item box'] [class='address_firstname address_lastname']")
+    WebElement BillAddressfirstName;
+
+    @FindBy(css = "[class='address item box'] [class='address_address1 address_address2']")
+    WebElement BillAddress2ndLine;
+
+    @FindBy(css = "[class='address item box'] [class='address_city address_state_name address_postcode']")
+    WebElement BillAddressCity;
+
+    @FindBy(css = "[class='address item box'] [class='address_country_name']")
+    WebElement BillAddresCountry;
+
+
+    @FindBy(css = "[class='address item box'] [class='address_phone_mobile']")
+    WebElement BillAddressHomeNum;
+
+
+    /*
+    Shipping
+     */
+
+    @FindBy(id = "cgv")
+    WebElement TermsConditions;
 
     public void DressSelector() {
         DressesSelector.click();
@@ -211,9 +236,62 @@ public class DressShoppingPage extends BaseUtil {
 
     }
 
-    public void compareAddressMatch() {
+    public boolean compareAddressMatch() {
 
 
+        if (addressNotEquals.isSelected()) {
+            addressNotEquals.click();
+        }
+
+        String DevFirstName = DevAddressfirstName.getText();
+        String DevAdrdressLine = DevAddress2ndLine.getText();
+        String DevadrdresCountry = DevAddresCountry.getText();
+        String DevhomeNum = DevAddressHomeNum.getText();
+
+
+        String BillfirstName = BillAddressfirstName.getText();
+        String BillAdrdressLine = BillAddress2ndLine.getText();
+        String BilladrdresCountry = BillAddresCountry.getText();
+        String BillhomeNum = BillAddressHomeNum.getText();
+
+
+        if (!DevFirstName.equals(BillfirstName)) {
+            return false;
+        }
+        if (!DevAdrdressLine.equals(BillAdrdressLine)) {
+            return false;
+        }
+
+        if (!DevadrdresCountry.equals(BilladrdresCountry)) {
+            if (!DevhomeNum.equals(BillhomeNum)) ;
+
+        }
+        return true;
+
+    }
+
+    public void goToShipping() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 3);
+        wait.until(ExpectedConditions.elementToBeClickable(step04Shipping));
+
+
+        step04Shipping.click();
+
+
+    }
+
+    public void ShippingAddress() {
+
+
+        if (!TermsConditions.isSelected()) {
+            TermsConditions.click();
+        }
+        ProceedToCheckOut.click();
+    }
+
+    public void paymentPage() {
+
+        Assert.assertTrue(step05Payment.isDisplayed());
     }
 }
 
