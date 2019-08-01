@@ -1,2 +1,1 @@
-# SeleniumWithCucumber
 Basic automation testing
